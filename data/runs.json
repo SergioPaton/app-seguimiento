@@ -1,0 +1,119 @@
+[
+  {
+    "id": "1",
+    "userId": "1",
+    "date": "2026-02-28T17:39:33.991Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  },
+  {
+    "id": "2",
+    "userId": "1",
+    "date": "2026-02-28T17:39:49.125Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  },
+  {
+    "id": "3",
+    "userId": "test-runner",
+    "date": "2026-02-28T17:40:34.477Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  },
+  {
+    "id": "4",
+    "userId": "5",
+    "date": "2026-02-28T17:41:38.664Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  },
+  {
+    "id": "5",
+    "userId": "7",
+    "date": "2026-02-28T17:42:16.482Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  },
+  {
+    "id": "6",
+    "userId": "9",
+    "date": "2026-02-28T17:42:33.925Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  },
+  {
+    "id": "7",
+    "userId": "11",
+    "date": "2026-02-28T17:52:28.954Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  },
+  {
+    "id": "8",
+    "userId": "13",
+    "date": "2026-02-28T17:58:22.693Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  },
+  {
+    "id": "9",
+    "userId": "15",
+    "date": "2026-02-28T18:00:11.782Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  },
+  {
+    "id": "10",
+    "userId": "17",
+    "date": "2026-02-28T18:01:19.233Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  },
+  {
+    "id": "11",
+    "userId": "19",
+    "date": "2026-02-28T18:04:59.069Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  },
+  {
+    "id": "12",
+    "userId": "21",
+    "date": "2026-02-28T18:05:05.275Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  },
+  {
+    "id": "13",
+    "userId": "23",
+    "date": "2026-02-28T18:08:06.920Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  }
+]
