@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Configuración del documento, viewport y metadatos del dashboard -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Stride</title>
+    
+    <!-- Conexión a Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap"
+        rel="stylesheet">
+    
+    <!-- Estilos generales -->
+    <link rel="stylesheet" href="./style.css">
+    
+    <!-- Estilos específicos y específicos del diseño de rejilla del Dashboard -->
+    <style>
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Estilos de la barra lateral izquierda */
+        .sidebar {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            height: fit-content;
+        }
+
+        /* Botones de navegación interna de la barra lateral */
+        .sidebar-btn {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            text-align: left;
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 500;
+            color: var(--color-text-light);
+            transition: all 0.2s;
+        }
+
+        /* Estado activo de los botones de la barra lateral */
+        .sidebar-btn.active {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        /* Paneles de sección del contenido principal (ocultos por defecto) */
+        .section-panel {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Panel activo que se hace visible */
+        .section-panel.active {
+            display: block;
+        }
+
+        /* Tarjeta para la representación visual de semanas de entrenamiento */
+        .week-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Elemento individual de sesión de entrenamiento */
+        .session-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .session-item:last-child {
+            border-bottom: none;
+        }
+
+        .session-type {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        /* Insignia para las sesiones completadas */
+        .completed-badge {
+            background: #def7ec;
+            color: #03543f;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        /* Animación de entrada suave (fade-in) */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Barra de navegación con nombre del usuario conectado y botón de salir -->
+    <nav>
+        <div class="container nav-content">
+            <a href="./index.html" class="logo">STRIDE</a>
+            <div class="nav-links">
+                <span id="userNameDisplay" style="margin-right: 1rem; font-weight: 600;">Hola!</span>
+                <a href="#" id="logoutBtn" class="btn">Salir</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Estructura principal del Dashboard -->
+    <div class="container dashboard-grid">
+        <!-- Barra lateral para cambiar de pestaña/sección -->
+        <aside class="sidebar">
+            <button class="sidebar-btn active" data-target="view-plan">Mi Plan Actual</button>
+            <button class="sidebar-btn" data-target="new-plan">Nuevo Objetivo</button>
+            <button class="sidebar-btn" data-target="my-stats">Mis Estadísticas</button>
+            <button class="sidebar-btn" data-target="log-workout">Registrar Entrenamiento</button>
+        </aside>
+
+        <!-- Contenedor del contenido dinámico -->
+        <main class="content">
+            <!-- Sección: Visualizar Plan Actual -->
+            <section id="view-plan" class="section-panel active">
+                <div id="planStatus">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h2>Tu Camino al Éxito</h2>
+                        <!-- Botón oculto por defecto, visible cuando hay un plan activo para poder borrarlo -->
+                        <button id="deletePlanBtn" class="btn"
+                            style="color: #e11d48; border: 1px solid #fda4af; display: none;">Eliminar Plan
+                            Actual</button>
+                    </div>
+                    <p id="planDescription" style="color: var(--color-text-light); margin-bottom: 2rem;">Cargando tu
+                        plan...</p>
+                    <div id="planList"></div>
+                </div>
+            </section>
+
+            <!-- Sección: Creación de un Nuevo Objetivo / Plan -->
+            <section id="new-plan" class="section-panel">
+                <h2>Crea un nuevo Objetivo</h2>
+                <div class="form-container" style="margin: 2rem 0; width: 100%; max-width: 100%;">
+                    <form id="newPlanForm">
+                        <!-- Selector del tipo de plan -->
+                        <div class="form-group">
+                            <label for="planType">Tipo de Plan</label>
+                            <select id="planType" name="planType" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem; font-family: inherit;">
+                                <option value="target">Preparar un Objetivo / Carrera</option>
+                                <option value="generic">Mejora General / Mantenimiento (Sin objetivo específico)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Campos del objetivo, mostrados u ocultados según el tipo de plan -->
+                        <div id="goalFieldsContainer">
+                            <div class="pb-grid">
+                                <div class="form-group">
+                                    <label for="goalDistance">Distancia del objetivo (km)</label>
+                                    <input type="number" id="goalDistance" name="goalDistance" value="10" step="0.1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="targetDate">Fecha de la carrera</label>
+                                    <input type="date" id="targetDate" name="targetDate" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="goalType">Tipo de Meta</label>
+                                <select id="goalType" name="goalType" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem; font-family: inherit;">
+                                    <option value="time">⏱️ Tiempo Total de Carrera (ej: 45:00 para correr 10k en 45 minutos)</option>
+                                    <option value="pace">📍 Ritmo por Kilómetro (ej: 4:30 = 4 min 30 seg por km)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="targetTime" id="targetTimeLabel">Tiempo Objetivo Total <small style="font-weight:400; color: var(--color-text-light);">(MM:SS)</small></label>
+                                <input type="text" id="targetTime" name="targetTime"
+                                    placeholder="Ej: 45:00" pattern="^[0-9]{1,3}:[0-5][0-9]$" title="Formato MM:SS. Para 45 minutos escribe 45:00" required>
+                            </div>
+                            <!-- Vista previa del ritmo calculado en tiempo real -->
+                            <div id="goalPacePreview" style="display:none; background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1px solid #86efac; border-radius: 10px; padding: 0.85rem 1.1rem; margin-bottom: 0.5rem;">
+                                <span style="font-size: 0.85rem; color: #166534; font-weight: 500;">💡 Ritmo que necesitarás:</span>
+                                <span id="goalPaceValue" style="display: block; font-size: 1.5rem; font-weight: 700; color: #15803d;"></span>
+                                <span style="font-size: 0.8rem; color: #4ade80;">min/km</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descripción (opcional)</label>
+                            <input type="text" id="description" name="description"
+                                placeholder="Ej: Maratón de Valencia o Mejora física">
+                        </div>
+                        
+                        <!-- Botón para modificar los datos del atleta en el momento de crear el plan -->
+                        <button type="button" id="toggleInlineStatsBtn" class="btn" style="background: var(--color-border); color: var(--color-text); margin: 1rem 0; width: 100%;">⚙️ Modificar mis Estadísticas de Atleta</button>
+                        
+                        <!-- Formulario interno de estadísticas del atleta -->
+                        <div id="inlineStatsContainer" style="display: none; border: 1px solid var(--color-border); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; background: #f8fafc; text-align: left;">
+                            <h4 style="margin-bottom: 1rem; color: var(--color-text-light);">Estadísticas de Atleta</h4>
+                            <div class="pb-grid">
+                                <div class="form-group">
+                                    <label for="inlineGender">Género</label>
+                                    <select id="inlineGender" name="gender" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem;">
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Femenino</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inlineAge">Edad</label>
+                                    <input type="number" id="inlineAge" name="age" min="14" max="100" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem;">
+                                </div>
+                            </div>
+                            <div class="pb-grid">
+                                <div class="form-group">
+                                    <label for="inlineLevel">Nivel de Experiencia</label>
+                                    <select id="inlineLevel" name="level" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem;">
+                                        <option value="beginner">🐣 Principiante (5 km base)</option>
+                                        <option value="intermediate">🏃 Intermedio (10 km base)</option>
+                                        <option value="advanced">⚡ Avanzado (20 km base)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inlineWeeklyVolume">Volumen Semanal (km)</label>
+                                    <input type="number" id="inlineWeeklyVolume" name="weeklyVolume" placeholder="Ej: 5" min="0" max="200" step="0.5" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem;">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Mejores Marcas (PB)</label>
+                                <div class="pb-grid">
+                                    <div>
+                                        <small>5km (MM:SS)</small>
+                                        <input type="text" id="inlinePb5k" name="pb5k" placeholder="22:30" pattern="^[0-9]{1,3}:[0-5][0-9]$" title="Formato MM:SS (Ej: 22:30)" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem;">
+                                    </div>
+                                    <div>
+                                        <small>10km (MM:SS)</small>
+                                        <input type="text" id="inlinePb10k" name="pb10k" placeholder="45:00" pattern="^[0-9]{1,3}:[0-5][0-9]$" title="Formato MM:SS (Ej: 45:00)" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inlineRhr">Frecuencia Cardíaca en Reposo (RHR)</label>
+                                <input type="number" id="inlineRhr" name="rhr" placeholder="Ej: 60" min="30" max="120" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem;">
+                            </div>
+                            <div class="form-group">
+                                <label>Días disponibles para entrenar</label>
+                                <div class="checkbox-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.5rem; margin-top: 0.5rem;">
+                                    <label><input type="checkbox" name="inlineDays" value="Monday"> Lunes</label>
+                                    <label><input type="checkbox" name="inlineDays" value="Tuesday"> Martes</label>
+                                    <label><input type="checkbox" name="inlineDays" value="Wednesday"> Miércoles</label>
+                                    <label><input type="checkbox" name="inlineDays" value="Thursday"> Jueves</label>
+                                    <label><input type="checkbox" name="inlineDays" value="Friday"> Viernes</label>
+                                    <label><input type="checkbox" name="inlineDays" value="Saturday"> Sábado</label>
+                                    <label><input type="checkbox" name="inlineDays" value="Sunday"> Domingo</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Generar Plan
+                            Inteligente</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Sección: Visualización y Edición de Estadísticas del Atleta -->
+            <section id="my-stats" class="section-panel">
+                <h2>Mis Estadísticas de Atleta</h2>
+                <div class="form-container" style="margin: 2rem 0; width: 100%; max-width: 100%;">
+                    <form id="myStatsForm">
+                        <div class="pb-grid">
+                            <div class="form-group">
+                                <label for="statsName">Nombre</label>
+                                <input type="text" id="statsName" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="statsLastName">Apellidos</label>
+                                <input type="text" id="statsLastName" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="pb-grid">
+                            <div class="form-group">
+                                <label for="statsGender">Género</label>
+                                <select id="statsGender" name="gender" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem;">
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Femenino</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="statsAge">Edad</label>
+                                <input type="number" id="statsAge" name="age" min="14" max="100" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem;">
+                            </div>
+                        </div>
+                        <!-- Nivel de experiencia -->
+                        <div class="form-group">
+                            <label for="statsLevel">Nivel de Experiencia</label>
+                            <select id="statsLevel" name="level" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem;">
+                                <option value="beginner">🐣 Principiante</option>
+                                <option value="intermediate">🏃 Intermedio</option>
+                                <option value="advanced">⚡ Avanzado</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Mejores Marcas Personales <small style="font-weight:400; color: var(--color-text-light);">(Tiempo total en MM:SS)</small></label>
+                            <div class="pb-grid">
+                                <div>
+                                    <small>5km — Ej: <strong>22:30</strong></small>
+                                    <input type="text" id="statsPb5k" name="pb5k" placeholder="22:30" pattern="^[0-9]{1,3}:[0-5][0-9]$" title="Formato MM:SS (Ej: 22:30)" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem;">
+                                </div>
+                                <div>
+                                    <small>10km — Ej: <strong>45:00</strong></small>
+                                    <input type="text" id="statsPb10k" name="pb10k" placeholder="45:00" pattern="^[0-9]{1,3}:[0-5][0-9]$" title="Formato MM:SS (Ej: 45:00)" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="statsRhr">Frecuencia Cardíaca en Reposo (RHR) <small style="font-weight:400;">(pulsaciones/min)</small></label>
+                            <input type="number" id="statsRhr" name="rhr" placeholder="Ej: 60" min="30" max="120" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem;">
+                        </div>
+                        <div class="form-group">
+                            <label>Días disponibles para entrenar</label>
+                            <div class="checkbox-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.5rem; margin-top: 0.5rem;">
+                                <label><input type="checkbox" name="statsDays" value="Monday"> Lunes</label>
+                                <label><input type="checkbox" name="statsDays" value="Tuesday"> Martes</label>
+                                <label><input type="checkbox" name="statsDays" value="Wednesday"> Miércoles</label>
+                                <label><input type="checkbox" name="statsDays" value="Thursday"> Jueves</label>
+                                <label><input type="checkbox" name="statsDays" value="Friday"> Viernes</label>
+                                <label><input type="checkbox" name="statsDays" value="Saturday"> Sábado</label>
+                                <label><input type="checkbox" name="statsDays" value="Sunday"> Domingo</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Guardar Cambios</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Sección: Registrar Sesión Realizada -->
+            <section id="log-workout" class="section-panel">
+                <h2>Registrar Sesión Realizada</h2>
+                <div class="form-container" style="margin: 2rem 0; width: 100%; max-width: 100%;">
+                    <form id="logRunForm">
+                        <div class="form-group">
+                            <label for="runDate">Fecha</label>
+                            <input type="date" id="runDate" name="runDate" required>
+                        </div>
+                        <div class="pb-grid">
+                            <div class="form-group">
+                                <label for="runDistance">Distancia (km)</label>
+                                <input type="number" id="runDistance" name="runDistance" step="0.01" placeholder="Ej: 10.5" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Duración del Entrenamiento</label>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin-top: 0.25rem; align-items: center;">
+                                    <div style="text-align: center;">
+                                        <input type="number" id="runDurationH" name="runDurationH" min="0" max="23" placeholder="0" style="width:100%; padding: 0.65rem; border-radius: 8px; border: 1px solid var(--color-border); text-align:center; font-size: 1.1rem;">
+                                        <small style="color: var(--color-text-light);">Horas</small>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <input type="number" id="runDurationM" name="runDurationM" min="0" max="59" placeholder="45" style="width:100%; padding: 0.65rem; border-radius: 8px; border: 1px solid var(--color-border); text-align:center; font-size: 1.1rem;">
+                                        <small style="color: var(--color-text-light);">Minutos</small>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <input type="number" id="runDurationS" name="runDurationS" min="0" max="59" placeholder="00" style="width:100%; padding: 0.65rem; border-radius: 8px; border: 1px solid var(--color-border); text-align:center; font-size: 1.1rem;">
+                                        <small style="color: var(--color-text-light);">Segundos</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tarjeta de ritmo calculado en tiempo real -->
+                        <div id="runPacePreview" style="display:none; background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #93c5fd; border-radius: 10px; padding: 0.85rem 1.1rem; margin-bottom: 1rem;">
+                            <span style="font-size: 0.85rem; color: #1e40af; font-weight: 500;">💨 Tu ritmo medio:</span>
+                            <span id="runPaceValue" style="display: block; font-size: 1.75rem; font-weight: 700; color: #1d4ed8;"></span>
+                            <span style="font-size: 0.8rem; color: #60a5fa;">min/km</span>
+                        </div>
+                        <!-- Selección opcional de la sesión planificada para vincularla -->
+                        <div class="form-group">
+                            <label for="linkSession">Vincular a sesión planificada (opcional)</label>
+                            <select id="linkSession" name="linkSession">
+                                <option value="">Ninguna / Carrera libre</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Guardar
+                            Entrenamiento</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal de Confirmación Personalizado para acciones críticas (ej: borrar plan) -->
+    <div id="confirmModal" class="modal"
+        style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center;">
+        <div
+            style="background: white; padding: 2rem; border-radius: 16px; width: 90%; max-width: 400px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);">
+            <h3 id="modalTitle">¿Estás seguro?</h3>
+            <p id="modalMessage" style="color: var(--color-text-light); margin: 1rem 0 2rem;">Esta acción no se puede
+                deshacer.</p>
+            <div style="display: flex; gap: 1rem;">
+                <button id="modalCancelBtn" class="btn" style="flex: 1;">Cancelar</button>
+                <button id="modalConfirmBtn" class="btn"
+                    style="flex: 1; background: #e11d48; color: white;">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script principal del dashboard que se conecta con la API de Stride -->
+    <script type="module" src="./dashboard.js"></script>
+</body>
+
+</html>

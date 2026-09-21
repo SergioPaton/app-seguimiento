@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Configuración del documento y metadatos de la página informativa -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Stride - Ciencia aplicada al Deporte</title>
+    
+    <!-- Conexión a Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap"
+        rel="stylesheet">
+    
+    <!-- Hoja de estilos compartida -->
+    <link rel="stylesheet" href="./style.css">
+    
+    <!-- Estilos CSS locales de la página de información -->
+    <style>
+        .about-content {
+            padding: 4rem 0;
+            max-width: 800px;
+        }
+
+        .about-content h2 {
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            color: var(--color-text-light);
+            font-size: 1.1rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: var(--color-primary-light);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .stat-box h4 {
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Barra de navegación con enlaces a login y registro -->
+    <nav>
+        <div class="container nav-content">
+            <a href="./index.html" class="logo">STRIDE</a>
+            <div class="nav-links">
+                <a href="./login.html" class="btn">Entrar</a>
+                <a href="./create-user.html" class="btn btn-primary">Empezar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal explicativo sobre la metodología de Stride -->
+    <main class="container about-content fade-in visible">
+        <h1>Entrenamiento Inteligente. Sin Atajos.</h1>
+        <p>Stride no es solo una calculadora de ritmos. Es un motor de inteligencia deportiva diseñado para acompañar al
+            corredor, desde sus primeros 5km hasta su maratón más rápida.</p>
+
+        <!-- Bloque 1: Periodización -->
+        <h2>1. El Motor de Periodización</h2>
+        <p>Nuestro algoritmo divide tu entrenamiento en tres bloques fundamentales para asegurar que llegues en tu pico
+            de forma al día de la carrera:</p>
+        <ul>
+            <li><strong>Base General</strong>: Construcción de resistencia aeróbica y fuerza básica.</li>
+            <li><strong>Preparación Específica</strong>: Introducción de ritmos de competición y series de alta
+                intensidad.</li>
+            <li><strong>Tapering (Afilado)</strong>: Reducción estratégica del volumen para maximizar la frescura
+                muscular.</li>
+        </ul>
+
+        <!-- Bloque 2: Zonas de Ritmo -->
+        <h2>2. Zonas de Ritmo Científicas</h2>
+        <p>Utilizamos tus mejores marcas personales (PB) para derivar 5 zonas de intensidad únicas para ti. No te damos
+            ritmos genéricos; te damos los ritmos que tu cuerpo necesita:</p>
+        <div class="about-grid">
+            <div class="stat-box">
+                <h4>Z1-Z2: Aeróbico</h4>
+                <p>Rodajes suaves para recuperar y construir base sin fatiga excesiva.</p>
+            </div>
+            <div class="stat-box">
+                <h4>Z4-Z5: Calidad</h4>
+                <p>Series e intervalos diseñados para elevar tu VO2 Max y velocidad punta.</p>
+            </div>
+        </div>
+
+        <!-- Bloque 3: Regla de Seguridad -->
+        <h2>3. Nuestra Regla de Oro: Seguridad</h2>
+        <p>La mayoría de las lesiones ocurren por un aumento brusco de la carga. En Stride:</p>
+        <p>✓ El volumen semanal nunca crece más de un <strong>10%</strong>.</p>
+        <p>✓ Implementamos una <strong>semana de descarga</strong> cada 4 semanas para asimilar el entrenamiento.</p>
+        <p>✓ Adaptamos la distribución de kilómetros según tus días disponibles, priorizando siempre la tirada larga del
+            fin de semana.</p>
+
+        <div style="margin-top: 4rem; text-align: center;">
+            <a href="./create-user.html" class="btn btn-primary" style="padding: 1rem 3rem; font-size: 1.2rem;">Configurar mi primer
+                Plan</a>
+        </div>
+    </main>
+
+    <!-- Pie de página informativo -->
+    <footer style="padding: 4rem 0; text-align: center; border-top: 1px solid var(--color-border); margin-top: 4rem;">
+        <div class="container">
+            <p style="color: var(--color-text-light)">&copy; 2026 Stride Science. Tecnología para corredores.</p>
+        </div>
+    </footer>
+
+    <!-- Script inline sencillo para comprobar la carga de la página -->
+    <script type="module">
+        console.log('About page ready!');
+    </script>
+</body>
+
+</html>

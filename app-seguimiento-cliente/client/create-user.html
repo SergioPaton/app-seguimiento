@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Configuración básica y juego de caracteres para la página de registro/creación de usuario -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Perfil - Stride</title>
+    
+    <!-- Fuentes de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap"
+        rel="stylesheet">
+    
+    <!-- Hoja de estilos compartida -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <!-- Barra de navegación con logo y botón para ir a la pantalla de login -->
+    <nav>
+        <div class="container nav-content">
+            <a href="./index.html" class="logo">STRIDE</a>
+            <div class="nav-links">
+                <a href="./login.html" class="btn">Entrar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor del formulario de registro y configuración del atleta -->
+    <div class="container">
+        <div class="form-container fade-in visible">
+            <h2 style="margin-bottom: 2rem; text-align: center;">Tu Perfil de Atleta</h2>
+
+            <!-- Formulario de creación de usuario -->
+            <form id="createUserForm">
+                <!-- Nombre del atleta -->
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" name="name" placeholder="Ej: Sergi" required>
+                </div>
+
+                <!-- Apellidos del atleta -->
+                <div class="form-group">
+                    <label for="lastName">Apellidos</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Ej: Runner Pérez" required>
+                </div>
+
+                <!-- Contraseña con requisito mínimo de longitud -->
+                <div class="form-group">
+                    <label for="password">Contraseña (Mínimo 4 caracteres)</label>
+                    <input type="password" id="password" name="password" placeholder="••••" minlength="4" required>
+                </div>
+
+                <!-- Cuadrícula para datos demográficos: Género y Edad -->
+                <div class="pb-grid">
+                    <div class="form-group">
+                        <label for="gender">Género</label>
+                        <select id="gender" name="gender">
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Edad</label>
+                        <input type="number" id="age" name="age" min="14" max="100" value="30">
+                    </div>
+                </div>
+
+                <!-- Nivel de experiencia del atleta -->
+                <div class="form-group">
+                    <label for="level">Nivel de Experiencia como Corredor</label>
+                    <select id="level" name="level">
+                        <option value="beginner">🐣 Principiante — Nuevo en el running o vuelvo tras un descanso largo</option>
+                        <option value="intermediate">🏃 Intermedio — Corro regularmente y tengo cierta base</option>
+                        <option value="advanced">⚡ Avanzado — Entreno de forma estructurada y compito</option>
+                    </select>
+                </div>
+
+                <!-- Volumen Semanal Habitual / Deseado (opcional) -->
+                <div class="form-group">
+                    <label for="weeklyVolume">Volumen Semanal Habitual <small style="font-weight:400; color: var(--color-text-light);">(opcional — km por semana)</small></label>
+                    <input type="number" id="weeklyVolume" name="weeklyVolume" placeholder="Ej: 5 (dejado en blanco se asigna por tu nivel)" min="0" max="200" step="0.5">
+                </div>
+
+                <!-- Mejores Marcas Personales (PB) en 5k y 10k: tiempo total como referencia personal -->
+                <div class="form-group">
+                    <label>Mejores Marcas Personales <small style="font-weight:400; color: var(--color-text-light);">(opcional — Tiempo total en MM:SS)</small></label>
+                    <div class="pb-grid">
+                        <div>
+                            <small>5km — Ej: <strong>22:30</strong> = 22 minutos 30 segundos</small>
+                            <input type="text" id="pb5k" name="pb5k" placeholder="22:30" pattern="^[0-9]{1,3}:[0-5][0-9]$" title="Formato MM:SS (Ej: 22:30)">
+                        </div>
+                        <div>
+                            <small>10km — Ej: <strong>45:00</strong> = 45 minutos</small>
+                            <input type="text" id="pb10k" name="pb10k" placeholder="45:00" pattern="^[0-9]{1,3}:[0-5][0-9]$" title="Formato MM:SS (Ej: 45:00)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Selección de los días de la semana preferidos para entrenar -->
+                <div class="form-group">
+                    <label>Días disponibles para entrenar</label>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item"><input type="checkbox" name="days" value="Monday"> Lunes</label>
+                        <label class="checkbox-item"><input type="checkbox" name="days" value="Tuesday"> Martes</label>
+                        <label class="checkbox-item"><input type="checkbox" name="days" value="Wednesday">
+                            Miércoles</label>
+                        <label class="checkbox-item"><input type="checkbox" name="days" value="Thursday"> Jueves</label>
+                        <label class="checkbox-item"><input type="checkbox" name="days" value="Friday"> Viernes</label>
+                        <label class="checkbox-item"><input type="checkbox" name="days" value="Saturday"> Sábado</label>
+                        <label class="checkbox-item"><input type="checkbox" name="days" value="Sunday"> Domingo</label>
+                    </div>
+                </div>
+
+                <!-- Botón de envío del formulario -->
+                <button type="submit" class="btn btn-primary"
+                    style="width: 100%; padding: 1rem; margin-top: 1rem;">Guardar y Continuar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script modular con la lógica de envío y registro del usuario -->
+    <script type="module" src="./create-user.js"></script>
+</body>
+
+</html>

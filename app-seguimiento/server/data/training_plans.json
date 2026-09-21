@@ -1,0 +1,704 @@
+[
+  {
+    "id": "1790015311332",
+    "userId": "84",
+    "goal": {
+      "distance": 10,
+      "description": "Test Training Plan"
+    },
+    "startDate": "2026-09-21T18:28:31.330Z",
+    "endDate": "2026-12-31T00:00:00.000Z",
+    "mesociclos": [
+      {
+        "type": "General Base",
+        "microciclos": [
+          {
+            "weekNumber": 1,
+            "startDate": "2026-09-21",
+            "sessions": [
+              {
+                "id": "1-Monday",
+                "day": "Monday",
+                "type": "Progression Run",
+                "description": "2.1km suave (@7:30) + 2.1km ritmo base (@7:00) + 2.1km alegre (@6:15)",
+                "targetDistance": 6.3,
+                "targetPace": "6:15",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "1-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "1-Friday",
+                "day": "Friday",
+                "type": "Long Run",
+                "description": "Carrera continua de 6.3km a ritmo sostenido para ganar fondo",
+                "targetDistance": 6.3,
+                "targetPace": "7:00",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 2,
+            "startDate": "2026-09-28",
+            "sessions": [
+              {
+                "id": "2-Monday",
+                "day": "Monday",
+                "type": "Progression Run",
+                "description": "2.2km suave (@7:30) + 2.2km ritmo base (@7:00) + 2.2km alegre (@6:15)",
+                "targetDistance": 6.62,
+                "targetPace": "6:15",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "2-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "2-Friday",
+                "day": "Friday",
+                "type": "Long Run",
+                "description": "Carrera continua de 6.62km a ritmo sostenido para ganar fondo",
+                "targetDistance": 6.62,
+                "targetPace": "7:00",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 3,
+            "startDate": "2026-10-05",
+            "sessions": [
+              {
+                "id": "3-Monday",
+                "day": "Monday",
+                "type": "Progression Run",
+                "description": "2.3km suave (@7:30) + 2.3km ritmo base (@7:00) + 2.4km alegre (@6:15)",
+                "targetDistance": 6.95,
+                "targetPace": "6:15",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "3-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "3-Friday",
+                "day": "Friday",
+                "type": "Long Run",
+                "description": "Carrera continua de 6.95km a ritmo sostenido para ganar fondo",
+                "targetDistance": 6.95,
+                "targetPace": "7:00",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 4,
+            "startDate": "2026-10-12",
+            "sessions": [
+              {
+                "id": "4-Monday",
+                "day": "Monday",
+                "type": "Hill Repeats",
+                "description": "2km Trote + 12x200m subida explosiva (@5:15) [rec: bajada trote] + 1.5km Trote",
+                "targetDistance": 5.91,
+                "targetPace": "5:15",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "4-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "4-Friday",
+                "day": "Friday",
+                "type": "Long Run",
+                "description": "Carrera continua de 5.91km a ritmo sostenido para ganar fondo",
+                "targetDistance": 5.91,
+                "targetPace": "7:00",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 5,
+            "startDate": "2026-10-19",
+            "sessions": [
+              {
+                "id": "5-Monday",
+                "day": "Monday",
+                "type": "Hill Repeats",
+                "description": "2km Trote + 19x200m subida explosiva (@5:15) [rec: bajada trote] + 1.5km Trote",
+                "targetDistance": 7.29,
+                "targetPace": "5:15",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "5-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "5-Friday",
+                "day": "Friday",
+                "type": "Long Run",
+                "description": "Carrera continua de 7.29km a ritmo sostenido para ganar fondo",
+                "targetDistance": 7.29,
+                "targetPace": "7:00",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Specific Preparation",
+        "microciclos": [
+          {
+            "weekNumber": 6,
+            "startDate": "2026-10-26",
+            "sessions": [
+              {
+                "id": "6-Monday",
+                "day": "Monday",
+                "type": "Intervals",
+                "description": "2.2km Trote Suave + 8x500m @5:45 (rec: 1'30\") + 1.5km Trote Suave",
+                "targetDistance": 7.66,
+                "targetPace": "5:45",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "6-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "6-Friday",
+                "day": "Friday",
+                "type": "Long Run",
+                "description": "Carrera continua de 7.66km a ritmo sostenido para ganar fondo",
+                "targetDistance": 7.66,
+                "targetPace": "7:00",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 7,
+            "startDate": "2026-11-02",
+            "sessions": [
+              {
+                "id": "7-Monday",
+                "day": "Monday",
+                "type": "Intervals",
+                "description": "2.4km Trote Suave + 8x500m @5:45 (rec: 1'30\") + 1.6km Trote Suave",
+                "targetDistance": 8,
+                "targetPace": "5:45",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "7-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "7-Friday",
+                "day": "Friday",
+                "type": "Long Run",
+                "description": "Carrera continua de 8.04km a ritmo sostenido para ganar fondo",
+                "targetDistance": 8.04,
+                "targetPace": "7:00",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 8,
+            "startDate": "2026-11-09",
+            "sessions": [
+              {
+                "id": "8-Monday",
+                "day": "Monday",
+                "type": "Intervals",
+                "description": "2km Trote Suave + 7x500m @5:45 (rec: 1'30\") + 1.3km Trote Suave",
+                "targetDistance": 6.83,
+                "targetPace": "5:45",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "8-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "8-Friday",
+                "day": "Friday",
+                "type": "Long Run",
+                "description": "Carrera continua de 6.83km a ritmo sostenido para ganar fondo",
+                "targetDistance": 6.83,
+                "targetPace": "7:00",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 9,
+            "startDate": "2026-11-16",
+            "sessions": [
+              {
+                "id": "9-Monday",
+                "day": "Monday",
+                "type": "Intervals",
+                "description": "2.4km Trote Suave + 8x500m @5:45 (rec: 1'30\") + 1.6km Trote Suave",
+                "targetDistance": 8,
+                "targetPace": "5:45",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "9-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "9-Friday",
+                "day": "Friday",
+                "type": "Long Run",
+                "description": "Carrera continua de 8.44km a ritmo sostenido para ganar fondo",
+                "targetDistance": 8.44,
+                "targetPace": "7:00",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 10,
+            "startDate": "2026-11-23",
+            "sessions": [
+              {
+                "id": "10-Monday",
+                "day": "Monday",
+                "type": "Tempo Run",
+                "description": "2km Trote Suave + 4.5km a ritmo umbral continuo (@6:15) + 1.5km Trote Suave",
+                "targetDistance": 8,
+                "targetPace": "6:15",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "10-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "10-Friday",
+                "day": "Friday",
+                "type": "Long Run",
+                "description": "Carrera continua de 8.86km a ritmo sostenido para ganar fondo",
+                "targetDistance": 8.86,
+                "targetPace": "7:00",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 11,
+            "startDate": "2026-11-30",
+            "sessions": [
+              {
+                "id": "11-Monday",
+                "day": "Monday",
+                "type": "Intervals",
+                "description": "2.4km Trote Suave + 8x500m @5:45 (rec: 1'30\") + 1.6km Trote Suave",
+                "targetDistance": 8,
+                "targetPace": "5:45",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "11-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "11-Friday",
+                "day": "Friday",
+                "type": "Long Run",
+                "description": "Carrera continua de 9.3km a ritmo sostenido para ganar fondo",
+                "targetDistance": 9.3,
+                "targetPace": "7:00",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Tapering & Goal",
+        "microciclos": [
+          {
+            "weekNumber": 12,
+            "startDate": "2026-12-07",
+            "sessions": [
+              {
+                "id": "12-Monday",
+                "day": "Monday",
+                "type": "Farklet",
+                "description": "1.9km Trote Suave + Farklet 3x(2' fuerte / 1' suave) @5:45 + 1.3km Trote Suave",
+                "targetDistance": 6.51,
+                "targetPace": "5:45",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "12-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "12-Friday",
+                "day": "Friday",
+                "type": "Long Run",
+                "description": "Carrera continua de 6.51km a ritmo sostenido para ganar fondo",
+                "targetDistance": 6.51,
+                "targetPace": "7:00",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 13,
+            "startDate": "2026-12-14",
+            "sessions": [
+              {
+                "id": "13-Monday",
+                "day": "Monday",
+                "type": "Farklet",
+                "description": "1.4km Trote Suave + Farklet 3x(2' fuerte / 1' suave) @5:45 + 0.9km Trote Suave",
+                "targetDistance": 4.56,
+                "targetPace": "5:45",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "13-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "13-Friday",
+                "day": "Friday",
+                "type": "Long Run",
+                "description": "Carrera continua de 4.56km a ritmo sostenido para ganar fondo",
+                "targetDistance": 4.56,
+                "targetPace": "7:00",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 14,
+            "startDate": "2026-12-21",
+            "sessions": [
+              {
+                "id": "14-Monday",
+                "day": "Monday",
+                "type": "Farklet",
+                "description": "1km Trote Suave + Farklet 3x(2' fuerte / 1' suave) @5:45 + 0.6km Trote Suave",
+                "targetDistance": 3.19,
+                "targetPace": "5:45",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "14-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "14-Friday",
+                "day": "Friday",
+                "type": "Long Run",
+                "description": "Carrera continua de 3.19km a ritmo sostenido para ganar fondo",
+                "targetDistance": 3.19,
+                "targetPace": "7:00",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1790015652964",
+    "userId": "44",
+    "goal": {
+      "distance": 6,
+      "description": "Carrera contra el cancer"
+    },
+    "startDate": "2026-09-21T18:34:12.962Z",
+    "endDate": "2026-10-18T00:00:00.000Z",
+    "mesociclos": [
+      {
+        "type": "General Base",
+        "microciclos": [
+          {
+            "weekNumber": 1,
+            "startDate": "2026-09-21",
+            "sessions": [
+              {
+                "id": "1-Monday",
+                "day": "Monday",
+                "type": "Hill Repeats",
+                "description": "2km Trote + 6x200m subida explosiva (@5:10) [rec: bajada trote] + 1.5km Trote",
+                "targetDistance": 4.72,
+                "targetPace": "5:10",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "1-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "1-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 4.72km a ritmo sostenido para ganar fondo",
+                "targetDistance": 4.72,
+                "targetPace": "6:50",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Specific Preparation",
+        "microciclos": [
+          {
+            "weekNumber": 2,
+            "startDate": "2026-09-28",
+            "sessions": [
+              {
+                "id": "2-Monday",
+                "day": "Monday",
+                "type": "Tempo Run",
+                "description": "2km Trote Suave + 1.3km a ritmo umbral continuo (@6:18) + 1.5km Trote Suave",
+                "targetDistance": 4.8,
+                "targetPace": "6:18",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "2-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "2-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 4.96km a ritmo sostenido para ganar fondo",
+                "targetDistance": 4.96,
+                "targetPace": "6:50",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Tapering & Goal",
+        "microciclos": [
+          {
+            "weekNumber": 3,
+            "startDate": "2026-10-05",
+            "sessions": [
+              {
+                "id": "3-Monday",
+                "day": "Monday",
+                "type": "Farklet",
+                "description": "1.1km Trote Suave + Farklet 3x(2' fuerte / 1' suave) @5:46 + 0.7km Trote Suave",
+                "targetDistance": 3.47,
+                "targetPace": "5:46",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "3-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "3-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 3.47km a ritmo sostenido para ganar fondo",
+                "targetDistance": 3.47,
+                "targetPace": "6:50",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 4,
+            "startDate": "2026-10-12",
+            "sessions": [
+              {
+                "id": "4-Monday",
+                "day": "Monday",
+                "type": "Farklet",
+                "description": "0.7km Trote Suave + Farklet 3x(2' fuerte / 1' suave) @5:46 + 0.5km Trote Suave",
+                "targetDistance": 2.43,
+                "targetPace": "5:46",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "4-Wednesday",
+                "day": "Wednesday",
+                "type": "Strength",
+                "description": "Fortalecimiento 45 min (CORE, piernas, estabilidad)",
+                "targetDistance": 0,
+                "targetPace": "N/A",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "4-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 2.43km a ritmo sostenido para ganar fondo",
+                "targetDistance": 2.43,
+                "targetPace": "6:50",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

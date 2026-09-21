@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Configuración básica y juego de caracteres para la página de login -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar - Stride</title>
+    
+    <!-- Fuentes de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap"
+        rel="stylesheet">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <!-- Barra de navegación simplificada (solo logo que regresa a inicio) -->
+    <nav>
+        <div class="container nav-content">
+            <a href="./index.html" class="logo">STRIDE</a>
+        </div>
+    </nav>
+
+    <!-- Contenedor principal para el formulario de login -->
+    <div class="container">
+        <div class="form-container fade-in visible">
+            <h2 style="margin-bottom: 2rem; text-align: center;">Bienvenido de nuevo</h2>
+
+            <!-- Formulario de inicio de sesión -->
+            <form id="loginForm">
+                <!-- Campo de texto para el nombre de usuario -->
+                <div class="form-group">
+                    <label for="name">¿Cuál es tu nombre?</label>
+                    <input type="text" id="name" name="name" placeholder="Ej: Sergi" required>
+                </div>
+
+                <!-- Campo para la contraseña -->
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" placeholder="••••" required>
+                </div>
+
+                <!-- Botón de envío del formulario -->
+                <button type="submit" class="btn btn-primary"
+                    style="width: 100%; padding: 1rem; margin-top: 1rem;">Entrar</button>
+
+                <!-- Enlace para usuarios que no tienen cuenta -->
+                <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--color-text-light);">
+                    Nuevo en Stride? <a href="./create-user.html"
+                        style="color: var(--color-primary); font-weight: 600;">Regístrate aquí</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script modular con la lógica de control del login -->
+    <script type="module" src="./login.js"></script>
+</body>
+
+</html>

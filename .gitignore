@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Logs and test outputs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+test_output*.txt
+
+# Environment variables & secret config
+.env
+.env.local
+.env.*.local
+*.env
+
+# Editor & IDE settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build / Output / Coverage directories
+dist/
+build/
+coverage/
+.nyc_output/
+
+# Cache directories
+.cache/
+.eslintcache
+*.tmp
+*.temp
+
+# Large media files (optional)
+*.mp4

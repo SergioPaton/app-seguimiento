@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Configuración básica del documento, juego de caracteres y viewport para diseño responsivo -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stride - Entrenamiente Inteligente</title>
+  
+  <!-- Conexión a las fuentes de Google Fonts (Inter y Outfit) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap"
+    rel="stylesheet">
+  
+  <!-- Enlace a la hoja de estilos general de la aplicación -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <!-- Barra de navegación superior con enlaces de acceso rápido -->
+  <nav>
+    <div class="container nav-content">
+      <a href="#" class="logo">STRIDE</a>
+      <div class="nav-links">
+        <a href="./about.html" class="btn">Saber más</a>
+        <a href="./login.html" class="btn">Entrar</a>
+        <a href="./create-user.html" class="btn btn-primary">Empezar Ahora</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sección Hero / Portada principal de presentación del producto -->
+  <header class="hero">
+    <div class="container fade-in">
+      <h1>Libera tu mejor marca.</h1>
+      <p>Entrenamientos inteligentes que se adaptan a tu vida, tu ritmo y tus objetivos. Sin complicaciones, solo
+        progreso.</p>
+      <div class="hero-actions">
+        <a href="./create-user.html" class="btn btn-primary">Crear mi Plan</a>
+        <a href="./about.html" class="btn" style="color: var(--color-primary); margin-left: 1rem;">Saber más</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sección de características clave y beneficios de la plataforma -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2>Diseñado para el corredor moderno</h2>
+        <p style="color: var(--color-text-light)">Nuestro motor combina ciencia del deporte con tus datos personales.
+        </p>
+      </div>
+
+      <!-- Cuadrícula con las tarjetas informativas -->
+      <div class="grid">
+        <!-- Tarjeta: Periodización -->
+        <div class="card fade-in">
+          <div class="icon">📈</div>
+          <h3>Periodización Dinámica</h3>
+          <p>Divide tu preparación en fases lógicas (Base, Específica, Taper) según el tiempo que tengas hasta tu meta.
+          </p>
+        </div>
+
+        <!-- Tarjeta: Ritmos Personalizados -->
+        <div class="card fade-in">
+          <div class="icon">⚡</div>
+          <h3>Ritmos Personalizados</h3>
+          <p>Calculamos tus zonas Z1-Z5 basándonos en tus marcas reales. Entrena siempre a la intensidad correcta.</p>
+        </div>
+
+        <!-- Tarjeta: Progreso Seguro -->
+        <div class="card fade-in">
+          <div class="icon">🛡️</div>
+          <h3>Progreso Seguro</h3>
+          <p>Aplicamos la regla del 10% y semanas de descarga automáticas para evitar lesiones y asegurar la adaptación.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pie de página con información de copyright -->
+  <footer style="padding: 4rem 0; border-top: 1px solid var(--color-border); text-align: center;">
+    <div class="container">
+      <p style="color: var(--color-text-light)">&copy; 2026 Stride Training. Minimalista. Potente. Tuyo.</p>
+    </div>
+  </footer >
+
+  <!-- Importación de la lógica de JavaScript principal del punto de entrada -->
+  <script type="module" src="./main.js"></script>
+</body>
+
+</html>
