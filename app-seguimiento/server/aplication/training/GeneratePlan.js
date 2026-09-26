@@ -10,7 +10,7 @@ const PaceCalculator = require('../../dominio/training/engine/PaceCalculator');
 const WorkoutLibrary = require('../../dominio/training/engine/WorkoutLibrary');
 
 /**
- * Service to generate a Training Plan based on periodization principles.
+ * Service to generate a Training Plan based on periodization principles and runner level.
  */
 class GeneratePlan {
     constructor(userRepository, trainingRepository) {
@@ -23,36 +23,46 @@ class GeneratePlan {
         this.workoutLibrary = new WorkoutLibrary();
     }
 
-    execute({ userId, goalDistance, targetDate, targetTime, description, isGeneric }) {
+    execute({ userId, goalDistance, targetDate, targetTime, description, isGeneric, level, cycleWeeks, cycleNumber = 1 }) {
         const user = this.userRepository.getById(userId);
         if (!user) {
             throw new ValidationError('User not found.');
         }
 
-        let finalGoalDistance = goalDistance;
+        const userLevel = level || user.level || 'beginner';
+
+        let finalGoalDistance = goalDistance ? parseFloat(goalDistance) : null;
         let finalTargetDate = targetDate;
         let finalDescription = description;
+        const isLoopable = Boolean(isGeneric || !targetDate);
+        let calculatedCycleWeeks = cycleWeeks ? parseInt(cycleWeeks) : null;
 
-        if (isGeneric || !goalDistance || !targetDate) {
-            // Determinar la distancia basada en marcas personales (PB) del usuario
-            if (user.pb) {
-                if (user.pb['10k']) {
-                    finalGoalDistance = 21; // Si corre 10k, sugerir Medio Maratón
-                } else if (user.pb['5k']) {
-                    finalGoalDistance = 10; // Si corre 5k, sugerir 10k
+        if (isLoopable || isGeneric || !goalDistance || !targetDate) {
+            // Si no se proporcionó una distancia explícita, sugerir según marcas (PB) o nivel
+            if (!finalGoalDistance) {
+                if (user.pb) {
+                    if (user.pb['10k']) finalGoalDistance = 21;
+                    else if (user.pb['5k']) finalGoalDistance = 10;
+                    else finalGoalDistance = 10;
                 } else {
-                    finalGoalDistance = 10; // Por defecto
+                    finalGoalDistance = 10;
                 }
-            } else {
-                finalGoalDistance = 10; // Por defecto
             }
 
-            // Duración por defecto de 8 semanas
+            // Duración del ciclo por defecto: si se pasa cycleWeeks se respeta; si se pasa level se calcula por nivel; por defecto 8 semanas.
+            if (!calculatedCycleWeeks) {
+                if (level) {
+                    calculatedCycleWeeks = userLevel === 'beginner' ? 4 : (userLevel === 'intermediate' ? 6 : 8);
+                } else {
+                    calculatedCycleWeeks = 8;
+                }
+            }
+
             const target = new Date();
-            target.setDate(target.getDate() + 8 * 7);
+            target.setDate(target.getDate() + calculatedCycleWeeks * 7);
             finalTargetDate = target.toISOString();
 
-            finalDescription = description || 'Plan de Mejora General';
+            finalDescription = description || (cycleNumber > 1 ? `Rutina Recurrente ${finalGoalDistance}k en Bucle (Ciclo ${cycleNumber})` : 'Plan de Mejora General');
         }
 
         const startDate = new Date();
@@ -62,27 +72,28 @@ class GeneratePlan {
             throw new ValidationError('Target date must be in the future.');
         }
 
+        const diffTime = Math.abs(endDate - startDate);
+        const totalWeeks = calculatedCycleWeeks || Math.max(1, Math.round(diffTime / (1000 * 60 * 60 * 24 * 7)));
+
         const plan = new TrainingPlan({
             userId,
             goal: { distance: finalGoalDistance, description: finalDescription },
             startDate: startDate.toISOString(),
-            endDate: endDate.toISOString()
+            endDate: endDate.toISOString(),
+            isGeneric: Boolean(isGeneric || isLoopable),
+            isLoopable: isLoopable,
+            cycleWeeks: totalWeeks,
+            cycleNumber: cycleNumber,
+            level: userLevel
         });
 
-        const diffTime = Math.abs(endDate - startDate);
-        const totalWeeks = Math.round(diffTime / (1000 * 60 * 60 * 24 * 7));
-
-        const phases = this.periodizationEngine.definePhases(totalWeeks);
-        const zones = this.paceCalculator.calculateZones(user.pb || {}, user.level || 'beginner');
+        const phases = this.periodizationEngine.definePhases(totalWeeks, plan.isGeneric);
+        const zones = this.paceCalculator.calculateZones(user.pb || {}, userLevel);
 
         // Calculate Goal Pace if targetTime is provided
         let goalPace = null;
         if (targetTime) {
             const totalGoalSeconds = this.paceCalculator.timeToSeconds(targetTime);
-            // If targetTime looks like a pace (e.g. 5:00), we don't divide by distance. 
-            // If it looks like a total time (e.g. 45:00 for 10k), we divide.
-            // Simple heuristic: if totalGoalSeconds < 15 * 60 (15 min), it's probably a pace per km (unless they are world record holders for 5k/10k)
-            // But better: if it's 5km and time is e.g. 25:00, distance is 5.
             if (totalGoalSeconds > 15 * 60 || (finalGoalDistance > 5 && totalGoalSeconds > 10 * 60)) {
                 goalPace = this.paceCalculator.secondsToTime(totalGoalSeconds / finalGoalDistance);
             } else {
@@ -92,8 +103,12 @@ class GeneratePlan {
 
         let currentWeek = 1;
 
-        // Initial volume based on User level, custom weekly volume, PB, and adapted to goal distance
-        let lastWeekVolume = this._calculateInitialVolume(user, finalGoalDistance);
+        // Volumen inicial adaptado al nivel del usuario y al número de ciclo (sobrecarga progresiva entre ciclos)
+        let baseVolume = this._calculateInitialVolume(user, finalGoalDistance, userLevel);
+        if (cycleNumber > 1) {
+            baseVolume = parseFloat((baseVolume * Math.pow(1.05, cycleNumber - 1)).toFixed(2));
+        }
+        let lastWeekVolume = baseVolume;
 
         phases.forEach(phase => {
             const mesociclo = new Mesociclo({ type: phase.type });
@@ -102,12 +117,10 @@ class GeneratePlan {
                 const weekStartDate = new Date(startDate);
                 weekStartDate.setDate(startDate.getDate() + (currentWeek - 1) * 7);
 
-                // Calculate volume for this week using conservative level-based progression
-                const weeklyVolume = this.progressionManager.calculateNextVolume(lastWeekVolume, currentWeek, phase.type, user.level || 'beginner');
+                // Calculate volume for this week using level-based progression
+                const weeklyVolume = this.progressionManager.calculateNextVolume(lastWeekVolume, currentWeek, phase.type, userLevel);
                 
-                // If it was a recovery week, we do not update lastWeekVolume with the reduced recovery volume.
-                // This keeps the baseline progressive.
-                const isRecoveryWeek = currentWeek % 4 === 0 && !phase.type.includes('Tapering');
+                const isRecoveryWeek = (currentWeek % 4 === 0 && !phase.type.includes('Tapering')) || phase.type.includes('Asimilación');
                 if (!isRecoveryWeek) {
                     lastWeekVolume = weeklyVolume;
                 }
@@ -121,18 +134,17 @@ class GeneratePlan {
                     ? user.availableDays
                     : ['Monday', 'Wednesday', 'Friday'];
 
-                // Determinar el número de días de carrera efectivos en la semana
                 const runningDays = days.filter((day, index) => {
-                    const sessionType = this._determineSessionType(day, index, days.length, phase.type);
+                    const sessionType = this._determineSessionType(day, index, days.length, phase.type, userLevel);
                     return sessionType !== 'Strength';
                 }).length;
 
-                // Determinar porcentaje dinámico equilibrado de la tirada larga
+                // Determinar porcentaje dinámico de tirada larga
                 let longRunPercent = 0.35;
                 if (runningDays === 1) {
                     longRunPercent = 1.0;
                 } else if (runningDays === 2) {
-                    longRunPercent = 0.50; // Reparto equilibrado (50%) si solo hay 2 días de carrera
+                    longRunPercent = 0.50;
                 } else if (runningDays === 3) {
                     longRunPercent = 0.40;
                 } else if (runningDays >= 4) {
@@ -140,24 +152,23 @@ class GeneratePlan {
                 }
 
                 days.forEach((day, index) => {
-                    const sessionType = this._determineSessionType(day, index, days.length, phase.type);
+                    const sessionType = this._determineSessionType(day, index, days.length, phase.type, userLevel);
                     const isLongRun = sessionType === 'LongRun';
                     const isStrength = sessionType === 'Strength';
 
-                    // Weighted Distribution: Long Run gets dynamic percentage of volume, others share the rest
                     let targetDistance;
                     if (isStrength) {
                         targetDistance = 0;
                     } else if (isLongRun) {
                         targetDistance = (weeklyVolume * longRunPercent);
                         
-                        // LÍMITE DE SEGURIDAD POR META ("Tirar por abajo" y asequible para amateur/principiante)
-                        const userLevel = user.level || 'beginner';
-                        let safetyFactor = 1.0; // En fase base no supera la distancia de la meta para principiante/intermedio
+                        let safetyFactor = 1.0;
                         if (userLevel === 'advanced') {
                             safetyFactor = 1.4;
-                        } else if (phase.type.includes('Specific')) {
+                        } else if (userLevel === 'intermediate') {
                             safetyFactor = 1.15;
+                        } else {
+                            safetyFactor = 0.9; // Para principiantes, la tirada larga no supera el 90% del objetivo en base
                         }
 
                         const maxAllowedLongRun = Math.max(finalGoalDistance * safetyFactor, 3);
@@ -167,16 +178,14 @@ class GeneratePlan {
                         const remainingVolume = weeklyVolume * (1 - longRunPercent);
                         targetDistance = remainingVolume / (remainingRunningDays > 0 ? remainingRunningDays : 1);
                         
-                        // Limitar sesiones secundarias para que no excedan el 80% de la meta
                         const maxSecondarySession = Math.max(finalGoalDistance * 0.8, 2.5);
                         targetDistance = Math.min(targetDistance, maxSecondarySession);
                     }
 
                     const template = this.workoutLibrary.getWorkoutTemplate(sessionType, zones, parseFloat(targetDistance.toFixed(2)));
 
-                    // Override pace if it's a Goal Pace session in Specific Phase
                     let finalPace = template.targetPace;
-                    if (goalPace && phase.type.includes('Specific') && (sessionType === 'Intervals' || sessionType === 'Farklet')) {
+                    if (goalPace && (phase.type.includes('Specific') || phase.type.includes('Desarrollo')) && (sessionType === 'Intervals' || sessionType === 'Farklet')) {
                         finalPace = goalPace;
                     }
 
@@ -197,26 +206,23 @@ class GeneratePlan {
             plan.addMesociclo(mesociclo);
         });
 
-        // Generate ID and persist
+        // Save plan
         plan.id = Date.now().toString();
         this.trainingRepository.save(plan);
 
         return plan;
     }
 
-
     /**
      * Estimates initial running volume based on User level, custom weekly volume, PB, and goal distance.
      */
-    _calculateInitialVolume(user, goalDistance) {
-        // 1. Si el usuario definió un volumen semanal personalizado explícito, usarlo como base
+    _calculateInitialVolume(user, goalDistance, userLevel = 'beginner') {
         if (user && user.weeklyVolume && user.weeklyVolume > 0) {
             return parseFloat(user.weeklyVolume);
         }
 
-        const level = user ? (user.level || 'beginner') : 'beginner';
+        const level = userLevel;
 
-        // 2. Si hay Marcas Personales (PB), calcular el nivel real del corredor basándose en el ritmo por km
         let pbVolume = null;
         if (user && user.pb) {
             const ref = user.pb['5k'] || user.pb['10k'];
@@ -231,26 +237,21 @@ class GeneratePlan {
             }
         }
 
-        // 3. Matriz de volumen inicial realista según Nivel y Distancia de Meta (Goal Distance)
         let baseVolume = 8;
 
         if (goalDistance <= 6) {
-            // Meta corta (5k - 6k)
-            if (level === 'beginner') baseVolume = 8;        // 8 km/semana (ej: 2 carreras de 4.0 km)
-            else if (level === 'intermediate') baseVolume = 14; // 14 km/semana (ej: 2 carreras de 7.0 km)
-            else baseVolume = 24;                             // 24 km/semana
+            if (level === 'beginner') baseVolume = 8;
+            else if (level === 'intermediate') baseVolume = 14;
+            else baseVolume = 24;
         } else if (goalDistance <= 10) {
-            // Meta 10k
-            if (level === 'beginner') baseVolume = 12;        // 12 km/semana
-            else if (level === 'intermediate') baseVolume = 20; // 20 km/semana
-            else baseVolume = 32;                             // 32 km/semana
+            if (level === 'beginner') baseVolume = 12;
+            else if (level === 'intermediate') baseVolume = 20;
+            else baseVolume = 32;
         } else if (goalDistance <= 21) {
-            // Medio Maratón (21k)
             if (level === 'beginner') baseVolume = 20;
             else if (level === 'intermediate') baseVolume = 30;
             else baseVolume = 45;
         } else {
-            // Maratón (42k)
             if (level === 'beginner') baseVolume = 35;
             else if (level === 'intermediate') baseVolume = 48;
             else baseVolume = 65;
@@ -264,53 +265,41 @@ class GeneratePlan {
     }
 
     /**
-     * Internal logic to vary session types within a week.
+     * Internal logic to vary session types within a week based on phase and runner level.
      */
-    _determineSessionType(day, index, totalDays, phaseType) {
-        // Wednesday or middle of the week is often Strength in the reference image
+    _determineSessionType(day, index, totalDays, phaseType, userLevel = 'beginner') {
         if (day === 'Wednesday' || (totalDays > 3 && index === Math.floor(totalDays / 2))) {
             return 'Strength';
         }
 
-        // Sunday or last session is often the Long Run
         if (day === 'Sunday' || index === totalDays - 1) {
             return 'LongRun';
         }
 
         const isBase = phaseType.includes('Base');
-        const isSpecific = phaseType.includes('Specific');
-        const isTaper = phaseType.includes('Tapering');
+        const isSpecific = phaseType.includes('Specific') || phaseType.includes('Desarrollo');
+        const isTaper = phaseType.includes('Tapering') || phaseType.includes('Asimilación');
 
-        // Quality Session (Usually first session of the week)
         if (index === 0) {
             if (isBase) {
-                // Base Phase: Hills or Progression
-                return Math.random() > 0.5 ? 'Hills' : 'Progression';
+                if (userLevel === 'beginner') return 'Progression';
+                return 'Hills';
             }
             if (isSpecific) {
-                // Specific Phase: Intervals or Tempo
-                return Math.random() > 0.5 ? 'Intervals' : 'Tempo';
+                if (userLevel === 'beginner') return 'Farklet';
+                return userLevel === 'intermediate' ? 'Tempo' : 'Intervals';
             }
             if (isTaper) {
-                // Tapering Phase: Farklet (short neuromuscular quality)
                 return 'Farklet';
             }
         }
 
-        // Secondary Running Day (if available)
         if (index === 1 && totalDays > 2) {
-            if (isBase) {
-                return 'Incremental';
-            }
-            if (isSpecific) {
-                return 'Farklet';
-            }
-            if (isTaper) {
-                return 'Recovery';
-            }
+            if (isBase) return 'Incremental';
+            if (isSpecific) return userLevel === 'beginner' ? 'Easy' : 'Farklet';
+            if (isTaper) return 'Recovery';
         }
 
-        // Third/other running days or recovery days
         if (isTaper) {
             return 'Recovery';
         }
@@ -319,4 +308,3 @@ class GeneratePlan {
 }
 
 module.exports = GeneratePlan;
-

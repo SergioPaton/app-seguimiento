@@ -16,8 +16,8 @@ class ProgressionManager {
      * @returns {number} El volumen objetivo calculado con dos decimales de precisión.
      */
     calculateNextVolume(baseVolume, weekInPlan, phaseType, level = null) {
-        // Semana de descarga/recuperación cada 4 semanas (excepto en fase de tapering)
-        const isRecoveryWeek = weekInPlan % 4 === 0 && !phaseType.includes('Tapering');
+        // Semana de descarga/recuperación cada 4 semanas o en fase de Asimilación
+        const isRecoveryWeek = (weekInPlan % 4 === 0 && !phaseType.includes('Tapering')) || phaseType.includes('Asimilación');
 
         if (isRecoveryWeek) {
             return parseFloat((baseVolume * 0.85).toFixed(2)); // Reducción del 15% para asimilación de cargas

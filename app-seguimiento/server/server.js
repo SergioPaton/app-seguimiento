@@ -41,11 +41,13 @@ const LoginUser = require('./aplication/users/LoginUser');
 const GeneratePlan = require('./aplication/training/GeneratePlan');
 const DeleteTrainingPlan = require('./aplication/training/DeleteTrainingPlan');
 const CompletePlannedSession = require('./aplication/training/CompletePlannedSession');
+const AdvancePlanCycle = require('./aplication/training/AdvancePlanCycle');
 
 // Instanciación de los casos de uso / servicios de aplicación
 const generatePlan = new GeneratePlan(userRepository, trainingRepository);
 const deleteTrainingPlan = new DeleteTrainingPlan(trainingRepository);
 const completePlannedSession = new CompletePlannedSession(trainingRepository, runRepository);
+const advancePlanCycle = new AdvancePlanCycle(trainingRepository, userRepository, generatePlan);
 
 const getAllRuns = new GetAllRuns(runRepository);
 const getRunById = new GetRunById(runRepository);
@@ -296,6 +298,19 @@ app.get('/api/users/:id/training-plan', (req, res, next) => {
         const plan = trainingRepository.getByUserId(req.params.id);
         if (!plan) throw new NotFoundError('No se encontró un plan de entrenamiento para este usuario.');
         res.json(plan.toJSON());
+    } catch (error) {
+        next(error);
+    }
+});
+
+/**
+ * Avanzar un plan en bucle / rutina al siguiente ciclo con sobrecarga progresiva.
+ * @route POST /api/training/:id/next-cycle
+ */
+app.post('/api/training/:id/next-cycle', (req, res, next) => {
+    try {
+        const newPlan = advancePlanCycle.execute(req.params.id);
+        res.json(newPlan.toJSON());
     } catch (error) {
         next(error);
     }

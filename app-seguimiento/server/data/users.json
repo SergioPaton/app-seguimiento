@@ -715,8 +715,8 @@
     "gender": "M",
     "age": 28,
     "pb": {
-      "5k": "30:00",
-      "10k": "60:00"
+      "5k": null,
+      "10k": null
     },
     "availableDays": [
       "Monday",
@@ -1300,5 +1300,125 @@
     "password": "1234",
     "level": "beginner",
     "weeklyVolume": 7
+  },
+  {
+    "id": "86",
+    "name": "TestRunsAPI-1790448053082",
+    "lastName": "Runner",
+    "gender": "M",
+    "age": 30,
+    "pb": {},
+    "availableDays": [],
+    "rhr": null,
+    "password": "password123",
+    "level": "beginner",
+    "weeklyVolume": null
+  },
+  {
+    "id": "87",
+    "name": "TestRunsAPI-1790448570402",
+    "lastName": "Runner",
+    "gender": "M",
+    "age": 30,
+    "pb": {},
+    "availableDays": [],
+    "rhr": null,
+    "password": "password123",
+    "level": "beginner",
+    "weeklyVolume": null
+  },
+  {
+    "id": "88",
+    "name": "TestAthlete-1790448570402",
+    "lastName": "Athlete",
+    "gender": "M",
+    "age": 30,
+    "pb": {},
+    "availableDays": [
+      "Monday",
+      "Wednesday",
+      "Friday"
+    ],
+    "rhr": null,
+    "password": "password123",
+    "level": "beginner",
+    "weeklyVolume": null
+  },
+  {
+    "id": "89",
+    "name": "TestAthlete-1790448638783",
+    "lastName": "Athlete",
+    "gender": "M",
+    "age": 30,
+    "pb": {},
+    "availableDays": [
+      "Monday",
+      "Wednesday",
+      "Friday"
+    ],
+    "rhr": null,
+    "password": "password123",
+    "level": "beginner",
+    "weeklyVolume": null
+  },
+  {
+    "id": "90",
+    "name": "TestAthlete-1790448653771",
+    "lastName": "Athlete",
+    "gender": "M",
+    "age": 30,
+    "pb": {},
+    "availableDays": [
+      "Monday",
+      "Wednesday",
+      "Friday"
+    ],
+    "rhr": null,
+    "password": "password123",
+    "level": "beginner",
+    "weeklyVolume": null
+  },
+  {
+    "id": "91",
+    "name": "TestRunsAPI-1790448654085",
+    "lastName": "Runner",
+    "gender": "M",
+    "age": 30,
+    "pb": {},
+    "availableDays": [],
+    "rhr": null,
+    "password": "password123",
+    "level": "beginner",
+    "weeklyVolume": null
+  },
+  {
+    "id": "92",
+    "name": "TestRunsAPI-1790448678128",
+    "lastName": "Runner",
+    "gender": "M",
+    "age": 30,
+    "pb": {},
+    "availableDays": [],
+    "rhr": null,
+    "password": "password123",
+    "level": "beginner",
+    "weeklyVolume": null
+  },
+  {
+    "id": "93",
+    "name": "TestAthlete-1790448678321",
+    "lastName": "Athlete",
+    "gender": "M",
+    "age": 30,
+    "pb": {},
+    "availableDays": [
+      "Monday",
+      "Wednesday",
+      "Friday"
+    ],
+    "rhr": null,
+    "password": "password123",
+    "level": "beginner",
+    "weeklyVolume": null
   }
 ]

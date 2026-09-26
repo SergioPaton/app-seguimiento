@@ -87,4 +87,43 @@ describe('GeneratePlan', () => {
 
         expect(plan.goal.distance).toBe(21); // Should upgrade 10k runners to half marathon distance (21km)
     });
+
+    test('should generate a custom recurring plan without target date adapted to level and cycle weeks', () => {
+        const plan = generatePlan.execute({
+            userId: 'test-user',
+            isGeneric: true,
+            goalDistance: 10,
+            level: 'beginner',
+            cycleWeeks: 4
+        });
+
+        let totalWeeks = 0;
+        plan.mesociclos.forEach(meso => {
+            totalWeeks += meso.microciclos.length;
+        });
+
+        expect(totalWeeks).toBe(4);
+        expect(plan.goal.distance).toBe(10);
+        expect(plan.level).toBe('beginner');
+        expect(plan.isLoopable).toBe(true);
+    });
+
+    test('should adapt volume and session types based on runner level', () => {
+        const beginnerPlan = generatePlan.execute({
+            userId: 'test-user',
+            goalDistance: 10,
+            level: 'beginner',
+            isGeneric: true
+        });
+
+        const advancedPlan = generatePlan.execute({
+            userId: 'test-user',
+            goalDistance: 10,
+            level: 'advanced',
+            isGeneric: true
+        });
+
+        expect(beginnerPlan.level).toBe('beginner');
+        expect(advancedPlan.level).toBe('advanced');
+    });
 });

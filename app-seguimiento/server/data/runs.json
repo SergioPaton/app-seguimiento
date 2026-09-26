@@ -1,1 +1,47 @@
-[]
+[
+  {
+    "id": "1",
+    "userId": "86",
+    "date": "2026-09-26T18:40:53.139Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  },
+  {
+    "id": "2",
+    "userId": "87",
+    "date": "2026-09-26T18:49:30.472Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  },
+  {
+    "id": "3",
+    "userId": "89",
+    "date": "2026-09-26T18:50:38.849Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  },
+  {
+    "id": "4",
+    "userId": "91",
+    "date": "2026-09-26T18:50:54.110Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  },
+  {
+    "id": "5",
+    "userId": "92",
+    "date": "2026-09-26T18:51:18.143Z",
+    "distance": 10,
+    "duration": 50,
+    "pace": "5.00",
+    "note": "Integration Test Run"
+  }
+]

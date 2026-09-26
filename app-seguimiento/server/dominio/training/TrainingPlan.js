@@ -23,12 +23,17 @@ class TrainingPlan {
      * @param {string} params.endDate - Fecha de finalización del plan (YYYY-MM-DD).
      * @param {Array<Object|Mesociclo>} [params.mesociclos=[]] - Lista de mesociclos que estructuran el plan.
      */
-    constructor({ id, userId, goal, startDate, endDate, mesociclos = [] }) {
+    constructor({ id, userId, goal, startDate, endDate, isGeneric = false, isLoopable = false, cycleWeeks = null, cycleNumber = 1, level = 'beginner', mesociclos = [] }) {
         this.id = id;
         this.userId = userId;
         this.goal = goal; // { distance: number, targetPace: string, description: string }
         this.startDate = startDate;
         this.endDate = endDate;
+        this.isGeneric = isGeneric;
+        this.isLoopable = isLoopable;
+        this.cycleWeeks = cycleWeeks;
+        this.cycleNumber = cycleNumber;
+        this.level = level;
 
         // Reconstitución profunda de mesociclos
         this.mesociclos = mesociclos.map(m => m instanceof Mesociclo ? m : new Mesociclo(m));
@@ -75,6 +80,11 @@ class TrainingPlan {
             goal: this.goal,
             startDate: this.startDate,
             endDate: this.endDate,
+            isGeneric: Boolean(this.isGeneric),
+            isLoopable: Boolean(this.isLoopable),
+            cycleWeeks: this.cycleWeeks || null,
+            cycleNumber: this.cycleNumber || 1,
+            level: this.level || 'beginner',
             mesociclos: this.mesociclos.map(m => (typeof m.toJSON === 'function' ? m.toJSON() : m))
         };
     }
