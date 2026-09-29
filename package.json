@@ -1,0 +1,10 @@
+{
+  "name": "app-proyecto-final",
+  "version": "1.0.0",
+  "description": "Script de inicio para servidor y cliente",
+  "main": "start.js",
+  "scripts": {
+    "start": "node start.js",
+    "dev": "node start.js"
+  }
+}

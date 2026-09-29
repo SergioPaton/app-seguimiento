@@ -116,6 +116,55 @@ function renderPlan(plan) {
     const planList = document.getElementById('planList');
     planList.innerHTML = '';
 
+    if (plan.isGeneric || plan.isLoopable) {
+        const levelNames = { beginner: '🐣 Principiante', intermediate: '🏃 Intermedio', advanced: '⚡ Avanzado' };
+        const levelLabel = levelNames[plan.level] || plan.level || '🐣 Principiante';
+
+        const loopBanner = document.createElement('div');
+        loopBanner.style = "background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #93c5fd; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;";
+        loopBanner.innerHTML = `
+            <div>
+                <h4 style="margin: 0; color: #1e40af; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                    <span>🔁 Rutina Recurrente en Bucle</span>
+                    <span style="background: #2563eb; color: white; padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 0.75rem;">Ciclo ${plan.cycleNumber || 1}</span>
+                    <span style="background: #e0e7ff; color: #3730a3; padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 0.75rem;">${levelLabel}</span>
+                </h4>
+                <p style="margin: 0.35rem 0 0; font-size: 0.875rem; color: #1e3a8a;">
+                    Rutina de ${plan.goal.distance}km (${plan.cycleWeeks || 6} semanas). Puedes reiniciarla al terminar para iniciar el siguiente ciclo con sobrecarga progresiva (+5% de carga).
+                </p>
+            </div>
+            <button id="nextCycleBtn" class="btn" style="background: #2563eb; color: white; border: none; padding: 0.65rem 1.25rem; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                🔁 Reiniciar / Siguiente Ciclo (+5% Sobrecarga)
+            </button>
+        `;
+        planList.appendChild(loopBanner);
+
+        setTimeout(() => {
+            const btn = document.getElementById('nextCycleBtn');
+            if (btn) {
+                btn.onclick = () => {
+                    showConfirm(
+                        'Avanzar al Siguiente Ciclo',
+                        `¿Deseas reiniciar la rutina de ${plan.goal.distance}km para comenzar el Ciclo ${(plan.cycleNumber || 1) + 1} con sobrecarga progresiva (+5% de carga)?`,
+                        async () => {
+                            try {
+                                const res = await fetch(`${API_BASE_URL}/training/${plan.id}/next-cycle`, { method: 'POST' });
+                                if (res.ok) {
+                                    showToast(`¡Ciclo ${(plan.cycleNumber || 1) + 1} iniciado con éxito!`, 'success');
+                                    await fetchPlan();
+                                } else {
+                                    showToast('Error al reiniciar el ciclo', 'error');
+                                }
+                            } catch (e) {
+                                showToast('Error de conexión', 'error');
+                            }
+                        }
+                    );
+                };
+            }
+        }, 50);
+    }
+
     plan.mesociclos.forEach((meso, mIdx) => {
         const mesoEl = document.createElement('div');
         mesoEl.innerHTML = `<h3 style="margin: 2rem 0 1rem; color: var(--color-text-light);">Bloque ${mIdx + 1}: ${meso.type}</h3>`;
@@ -325,20 +374,20 @@ const planTypeSelect = document.getElementById('planType');
 if (planTypeSelect) {
     planTypeSelect.addEventListener('change', (e) => {
         const container = document.getElementById('goalFieldsContainer');
-        const distanceInput = document.getElementById('goalDistance');
+        const cycleWeeksGroup = document.getElementById('cycleWeeksGroup');
         const dateInput = document.getElementById('targetDate');
         const timeInput = document.getElementById('targetTime');
         
         if (e.target.value === 'generic') {
             container.style.display = 'none';
-            distanceInput.removeAttribute('required');
-            dateInput.removeAttribute('required');
-            timeInput.removeAttribute('required');
+            if (cycleWeeksGroup) cycleWeeksGroup.style.display = 'block';
+            if (dateInput) dateInput.removeAttribute('required');
+            if (timeInput) timeInput.removeAttribute('required');
         } else {
             container.style.display = 'block';
-            distanceInput.setAttribute('required', '');
-            dateInput.setAttribute('required', '');
-            timeInput.setAttribute('required', '');
+            if (cycleWeeksGroup) cycleWeeksGroup.style.display = 'none';
+            if (dateInput) dateInput.setAttribute('required', '');
+            if (timeInput) timeInput.setAttribute('required', '');
         }
     });
 }
@@ -457,7 +506,10 @@ document.getElementById('newPlanForm').addEventListener('submit', async (e) => {
         planData = {
             userId: userId,
             isGeneric: true,
-            description: formData.get('description')
+            goalDistance: parseFloat(formData.get('goalDistance')),
+            level: formData.get('planLevel') || 'beginner',
+            cycleWeeks: parseInt(formData.get('cycleWeeks')) || 6,
+            description: formData.get('description') || null
         };
     } else {
         const goalType = formData.get('goalType');
@@ -466,7 +518,7 @@ document.getElementById('newPlanForm').addEventListener('submit', async (e) => {
         let targetTime = rawTargetTime;
 
         // Si se define tiempo total objetivo, se realiza una conversión matemática en el cliente a ritmo (pace)
-        if (goalType === 'time') {
+        if (goalType === 'time' && rawTargetTime) {
             const totalSeconds = timeToSeconds(rawTargetTime);
             const secondPerKm = totalSeconds / goalDistance;
             targetTime = secondsToTime(secondPerKm);
@@ -477,7 +529,8 @@ document.getElementById('newPlanForm').addEventListener('submit', async (e) => {
             goalDistance: goalDistance,
             targetDate: formData.get('targetDate'),
             targetTime: targetTime, // Envío del ritmo calculado
-            description: formData.get('description')
+            level: formData.get('planLevel') || 'beginner',
+            description: formData.get('description') || null
         };
     }
 

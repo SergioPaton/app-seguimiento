@@ -1288,7 +1288,7 @@
     "gender": "M",
     "age": 30,
     "pb": {
-      "5k": null,
+      "5k": "30:00",
       "10k": null
     },
     "availableDays": [
@@ -1418,6 +1418,23 @@
     ],
     "rhr": null,
     "password": "password123",
+    "level": "beginner",
+    "weeklyVolume": null
+  },
+  {
+    "id": "94",
+    "name": "grsdf",
+    "lastName": "paton",
+    "gender": "M",
+    "age": 30,
+    "pb": {},
+    "availableDays": [
+      "Monday",
+      "Wednesday",
+      "Sunday"
+    ],
+    "rhr": null,
+    "password": "1234",
     "level": "beginner",
     "weeklyVolume": null
   }

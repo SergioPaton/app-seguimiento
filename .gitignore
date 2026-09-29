@@ -44,3 +44,4 @@ coverage/
 
 # Large media files (optional)
 *.mp4
+.aider*
