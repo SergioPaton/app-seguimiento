@@ -40,6 +40,10 @@ class TrainingRepository {
         return rawData.map(planData => new TrainingPlan(planData));
     }
 
+    getById(id) {
+        return this.getAll().find(plan => plan.id === id);
+    }
+
     getByUserId(userId) {
         return this.getAll().find(plan => plan.userId === userId);
     }
