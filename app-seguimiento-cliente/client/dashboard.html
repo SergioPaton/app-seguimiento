@@ -131,7 +131,7 @@
             <a href="./index.html" class="logo">STRIDE</a>
             <div class="nav-links">
                 <span id="userNameDisplay" style="margin-right: 1rem; font-weight: 600;">Hola!</span>
-                <a href="#" id="logoutBtn" class="btn">Salir</a>
+                <a href="#" id="logoutBtn" class="btn" aria-label="Cerrar sesión">Salir</a>
             </div>
         </div>
     </nav>
@@ -139,37 +139,38 @@
     <!-- Estructura principal del Dashboard -->
     <div class="container dashboard-grid">
         <!-- Barra lateral para cambiar de pestaña/sección -->
-        <aside class="sidebar">
-            <button class="sidebar-btn active" data-target="view-plan">Mi Plan Actual</button>
+        <aside class="sidebar" role="navigation" aria-label="Navegación principal">
+            <button class="sidebar-btn active" data-target="view-plan" aria-current="page">Mi Plan Actual</button>
             <button class="sidebar-btn" data-target="new-plan">Nuevo Objetivo</button>
             <button class="sidebar-btn" data-target="my-stats">Mis Estadísticas</button>
             <button class="sidebar-btn" data-target="log-workout">Registrar Entrenamiento</button>
         </aside>
 
         <!-- Contenedor del contenido dinámico -->
-        <main class="content">
+        <main class="content" role="main">
             <!-- Sección: Visualizar Plan Actual -->
-            <section id="view-plan" class="section-panel active">
+            <section id="view-plan" class="section-panel active" aria-labelledby="view-plan-title">
                 <div id="planStatus">
                     <div
                         style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                        <h2>Tu Camino al Éxito</h2>
+                        <h2 id="view-plan-title">Tu Camino al Éxito</h2>
                         <!-- Botón oculto por defecto, visible cuando hay un plan activo para poder borrarlo -->
                         <button id="deletePlanBtn" class="btn"
-                            style="color: #e11d48; border: 1px solid #fda4af; display: none;">Eliminar Plan
+                            style="color: #e11d48; border: 1px solid #fda4af; display: none;"
+                            aria-label="Eliminar plan actual">Eliminar Plan
                             Actual</button>
                     </div>
                     <p id="planDescription" style="color: var(--color-text-light); margin-bottom: 2rem;">Cargando tu
                         plan...</p>
-                    <div id="planList"></div>
+                    <div id="planList" aria-live="polite"></div>
                 </div>
             </section>
 
             <!-- Sección: Creación de un Nuevo Objetivo / Plan -->
-            <section id="new-plan" class="section-panel">
-                <h2>Crea un nuevo Objetivo</h2>
+            <section id="new-plan" class="section-panel" aria-labelledby="new-plan-title">
+                <h2 id="new-plan-title">Crea un nuevo Objetivo</h2>
                 <div class="form-container" style="margin: 2rem 0; width: 100%; max-width: 100%;">
-                    <form id="newPlanForm">
+                    <form id="newPlanForm" aria-describedby="new-plan-title">
                         <!-- Selector del tipo de plan -->
                         <div class="form-group">
                             <label for="planType">Tipo de Planificación</label>
@@ -308,10 +309,10 @@
             </section>
 
             <!-- Sección: Visualización y Edición de Estadísticas del Atleta -->
-            <section id="my-stats" class="section-panel">
-                <h2>Mis Estadísticas de Atleta</h2>
+            <section id="my-stats" class="section-panel" aria-labelledby="my-stats-title">
+                <h2 id="my-stats-title">Mis Estadísticas de Atleta</h2>
                 <div class="form-container" style="margin: 2rem 0; width: 100%; max-width: 100%;">
-                    <form id="myStatsForm">
+                    <form id="myStatsForm" aria-describedby="my-stats-title">
                         <div class="pb-grid">
                             <div class="form-group">
                                 <label for="statsName">Nombre</label>
@@ -380,10 +381,10 @@
             </section>
 
             <!-- Sección: Registrar Sesión Realizada -->
-            <section id="log-workout" class="section-panel">
-                <h2>Registrar Sesión Realizada</h2>
+            <section id="log-workout" class="section-panel" aria-labelledby="log-workout-title">
+                <h2 id="log-workout-title">Registrar Sesión Realizada</h2>
                 <div class="form-container" style="margin: 2rem 0; width: 100%; max-width: 100%;">
-                    <form id="logRunForm">
+                    <form id="logRunForm" aria-describedby="log-workout-title">
                         <div class="form-group">
                             <label for="runDate">Fecha</label>
                             <input type="date" id="runDate" name="runDate" required>
