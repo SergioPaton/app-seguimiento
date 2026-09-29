@@ -1,52 +1,35 @@
-// URL base del backend de la aplicación para interactuar con la API
 const API_BASE_URL = 'http://localhost:3000/api';
 
-// Obtención del ID del usuario autenticado almacenado localmente
 const userId = localStorage.getItem('stride_user_id');
 
-// Redirección al login en caso de no existir una sesión activa
 if (!userId) {
     window.location.href = './login.html';
 }
 
-// Variables de estado local de la aplicación
-let currentPlan = null;  // Almacena el plan de entrenamiento cargado
-let currentUser = null;   // Almacena la información del usuario actual
+let currentPlan = null;
+let currentUser = null;
 
-/**
- * Función de inicialización principal. Ejecutada al cargar la página.
- */
 async function init() {
-    await fetchUser();       // Obtiene datos del atleta
-    await fetchPlan();       // Obtiene el plan de entrenamiento activo
-    setupNavigation();       // Inicializa listeners de UI y navegación
+    await fetchUser();
+    await fetchPlan();
+    setupNavigation();
 }
 
-/**
- * Recupera los datos del usuario/atleta desde el servidor backend.
- */
 async function fetchUser() {
     try {
         const res = await fetch(`${API_BASE_URL}/users/${userId}`);
         if (res.ok) {
             currentUser = await res.json();
-            // Actualiza la UI con el nombre del usuario
             document.getElementById('userNameDisplay').textContent = `Hola, ${currentUser.name}!`;
-            populateUserStats(currentUser); // Rellena los formularios con sus datos
+            populateUserStats(currentUser);
         }
     } catch (e) {
         console.error('Error fetching user:', e);
     }
 }
 
-/**
- * Rellena los diferentes campos de los formularios de configuración del atleta con sus datos actuales.
- * @param {Object} user - Objeto con los datos del usuario.
- */
 function populateUserStats(user) {
     if (!user) return;
-    
-    // Rellena los campos de la sección de estadísticas principales
     document.getElementById('statsName').value = user.name || '';
     document.getElementById('statsLastName').value = user.lastName || '';
     document.getElementById('statsGender').value = user.gender || 'M';
@@ -54,14 +37,10 @@ function populateUserStats(user) {
     document.getElementById('statsPb5k').value = (user.pb && user.pb['5k']) || '';
     document.getElementById('statsPb10k').value = (user.pb && user.pb['10k']) || '';
     document.getElementById('statsRhr').value = user.rhr || '';
-    
-    // Marca los checkboxes de días de entrenamiento disponibles en la sección principal
     const statsCheckboxes = document.querySelectorAll('input[name="statsDays"]');
     statsCheckboxes.forEach(cb => {
         cb.checked = user.availableDays && user.availableDays.includes(cb.value);
     });
-
-    // Rellena la sección de edición rápida (inline) dentro de la pestaña de Nuevo Objetivo
     document.getElementById('inlineGender').value = user.gender || 'M';
     document.getElementById('inlineAge').value = user.age || '';
     if (document.getElementById('inlineLevel')) document.getElementById('inlineLevel').value = user.level || 'beginner';
@@ -69,17 +48,12 @@ function populateUserStats(user) {
     document.getElementById('inlinePb5k').value = (user.pb && user.pb['5k']) || '';
     document.getElementById('inlinePb10k').value = (user.pb && user.pb['10k']) || '';
     document.getElementById('inlineRhr').value = user.rhr || '';
-    
-    // Marca los checkboxes de la sección rápida (inline)
     const inlineCheckboxes = document.querySelectorAll('input[name="inlineDays"]');
     inlineCheckboxes.forEach(cb => {
         cb.checked = user.availableDays && user.availableDays.includes(cb.value);
     });
 }
 
-/**
- * Recupera el plan de entrenamiento activo del usuario desde el servidor.
- */
 async function fetchPlan() {
     const planList = document.getElementById('planList');
     const planDesc = document.getElementById('planDescription');
@@ -90,10 +64,10 @@ async function fetchPlan() {
 
         if (res.ok) {
             currentPlan = await res.json();
-            deleteBtn.style.display = 'block'; // Muestra el botón para eliminar el plan actual
+            deleteBtn.style.display = 'block';
             planDesc.textContent = `${currentPlan.goal.description || 'Plan de Entrenamiento'} - Meta: ${currentPlan.goal.distance}km`;
-            renderPlan(currentPlan); // Dibuja el plan en pantalla
-            populateSessionOptions(currentPlan); // Rellena el selector para vincular entrenamientos
+            renderPlan(currentPlan);
+            populateSessionOptions(currentPlan);
         } else {
             currentPlan = null;
             deleteBtn.style.display = 'none';
@@ -108,10 +82,6 @@ async function fetchPlan() {
     }
 }
 
-/**
- * Renderiza el plan de entrenamiento en la interfaz de usuario en forma de bloques y semanas.
- * @param {Object} plan - Objeto del plan de entrenamiento que contiene mesociclos y sesiones.
- */
 function renderPlan(plan) {
     const planList = document.getElementById('planList');
     planList.innerHTML = '';
@@ -158,7 +128,8 @@ function renderPlan(plan) {
                             } catch (e) {
                                 showToast('Error de conexión', 'error');
                             }
-                        }
+                        },
+                        'Aceptar'
                     );
                 };
             }
@@ -197,19 +168,13 @@ function renderPlan(plan) {
     });
 }
 
-/**
- * Rellena el selector desplegable en el formulario de registrar entrenamiento con las sesiones planificadas no completadas.
- * @param {Object} plan - El plan de entrenamiento del usuario.
- */
 function populateSessionOptions(plan) {
     const select = document.getElementById('linkSession');
-    // Mantenemos la opción por defecto
     select.innerHTML = '<option value="">Ninguna / Carrera libre</option>';
 
     plan.mesociclos.forEach(meso => {
         meso.microciclos.forEach(micro => {
             micro.sessions.forEach(s => {
-                // Solo muestra sesiones que no hayan sido completadas aún
                 if (s.status !== 'Completed') {
                     const opt = document.createElement('option');
                     opt.value = `${plan.id}|${s.id}`;
@@ -221,14 +186,10 @@ function populateSessionOptions(plan) {
     });
 }
 
-/**
- * Configura la navegación de pestañas en el panel lateral y eventos clave.
- */
 function setupNavigation() {
     const buttons = document.querySelectorAll('.sidebar-btn');
     const panels = document.querySelectorAll('.section-panel');
 
-    // Cambios visuales al hacer clic en botones laterales
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
             const target = btn.dataset.target;
@@ -241,13 +202,11 @@ function setupNavigation() {
         });
     });
 
-    // Cerrar sesión
     document.getElementById('logoutBtn').addEventListener('click', () => {
         localStorage.removeItem('stride_user_id');
         window.location.href = './index.html';
     });
 
-    // Eliminar plan actual mediante confirmación modal
     document.getElementById('deletePlanBtn').addEventListener('click', () => {
         showConfirm(
             'Eliminar Plan de Entrenamiento',
@@ -268,18 +227,13 @@ function setupNavigation() {
                     console.error('Error deleting plan:', e);
                     showToast('No se pudo eliminar el plan. Inténtalo de nuevo.', 'error');
                 }
-            }
+            },
+            'Eliminar'
         );
     });
 }
 
-/**
- * Muestra un modal de confirmación personalizado.
- * @param {string} title - Título del modal.
- * @param {string} message - Mensaje descriptivo.
- * @param {Function} onConfirm - Callback que se ejecuta tras aceptar la acción.
- */
-function showConfirm(title, message, onConfirm) {
+function showConfirm(title, message, onConfirm, confirmText = 'Eliminar') {
     const modal = document.getElementById('confirmModal');
     const titleEl = document.getElementById('modalTitle');
     const msgEl = document.getElementById('modalMessage');
@@ -288,6 +242,7 @@ function showConfirm(title, message, onConfirm) {
 
     titleEl.textContent = title;
     msgEl.textContent = message;
+    confirmBtn.textContent = confirmText;
     modal.style.display = 'flex';
 
     const close = () => { modal.style.display = 'none'; };
@@ -296,11 +251,6 @@ function showConfirm(title, message, onConfirm) {
     cancelBtn.onclick = close;
 }
 
-/**
- * Muestra alertas visuales temporales.
- * @param {string} message - Mensaje a mostrar.
- * @param {'success'|'error'} type - Tipo de notificación.
- */
 function showToast(message, type = 'success') {
     let container = document.querySelector('.toast-container');
     if (!container) {
@@ -326,11 +276,6 @@ function showToast(message, type = 'success') {
     }, 4000);
 }
 
-/**
- * Convierte un formato de tiempo string MM:SS o M:SS en segundos enteros.
- * @param {string} timeStr - Tiempo en formato MM:SS.
- * @returns {number} Segundos equivalentes.
- */
 function timeToSeconds(timeStr) {
     if (!timeStr) return 0;
     const parts = timeStr.split(':').map(Number);
@@ -340,18 +285,12 @@ function timeToSeconds(timeStr) {
     return parts[0] * 60;
 }
 
-/**
- * Convierte segundos enteros en un string con formato MM:SS.
- * @param {number} seconds - Segundos totales.
- * @returns {string} Tiempo formateado.
- */
 function secondsToTime(seconds) {
     const m = Math.floor(seconds / 60);
     const s = Math.round(seconds % 60);
     return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
-// Escucha cambios en la selección de tipo de meta para ajustar la etiqueta e inputs del formulario
 const goalTypeSelect = document.getElementById('goalType');
 if (goalTypeSelect) {
     goalTypeSelect.addEventListener('change', (e) => {
@@ -369,7 +308,6 @@ if (goalTypeSelect) {
     });
 }
 
-// Escucha cambios en el selector de tipo de plan (carrera vs genérico) para alternar visibilidad de campos de meta
 const planTypeSelect = document.getElementById('planType');
 if (planTypeSelect) {
     planTypeSelect.addEventListener('change', (e) => {
@@ -392,7 +330,6 @@ if (planTypeSelect) {
     });
 }
 
-// Alterna la visibilidad de la sección inline de estadísticas del atleta en la generación del nuevo objetivo
 const toggleInlineBtn = document.getElementById('toggleInlineStatsBtn');
 if (toggleInlineBtn) {
     toggleInlineBtn.addEventListener('click', () => {
@@ -407,7 +344,6 @@ if (toggleInlineBtn) {
     });
 }
 
-// Envío del formulario de la pestaña de estadísticas
 const myStatsForm = document.getElementById('myStatsForm');
 if (myStatsForm) {
     myStatsForm.addEventListener('submit', async (e) => {
@@ -441,7 +377,7 @@ if (myStatsForm) {
 
             if (res.ok) {
                 showToast('¡Estadísticas actualizadas con éxito!', 'success');
-                await fetchUser(); // Sincroniza datos en UI
+                await fetchUser();
             } else {
                 const errData = await res.json().catch(() => ({}));
                 showToast(`Error al guardar estadísticas: ${errData.error || 'Inténtalo de nuevo'}`, 'error');
@@ -452,13 +388,11 @@ if (myStatsForm) {
     });
 }
 
-// Envío del formulario para generar un nuevo plan inteligente
 document.getElementById('newPlanForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const planType = formData.get('planType');
 
-    // 1. Si las estadísticas inline del atleta están editándose, se guardan primero.
     const inlineContainer = document.getElementById('inlineStatsContainer');
     if (inlineContainer && inlineContainer.style.display !== 'none') {
         const inlineDays = [];
@@ -489,10 +423,10 @@ document.getElementById('newPlanForm').addEventListener('submit', async (e) => {
             if (!resUpdate.ok) {
                 const errData = await resUpdate.json().catch(() => ({}));
                 showToast(`Error al actualizar estadísticas de atleta: ${errData.error || 'Inténtalo de nuevo'}`, 'error');
-                return; // Frena si falla el guardado del perfil
+                return;
             }
             
-            await fetchUser(); // Sincroniza localmente
+            await fetchUser();
         } catch (e) {
             showToast('Error al actualizar estadísticas de atleta', 'error');
             return;
@@ -501,7 +435,6 @@ document.getElementById('newPlanForm').addEventListener('submit', async (e) => {
 
     let planData;
 
-    // Estructuración de datos para el endpoint /training/generate
     if (planType === 'generic') {
         planData = {
             userId: userId,
@@ -517,7 +450,6 @@ document.getElementById('newPlanForm').addEventListener('submit', async (e) => {
         const goalDistance = parseFloat(formData.get('goalDistance'));
         let targetTime = rawTargetTime;
 
-        // Si se define tiempo total objetivo, se realiza una conversión matemática en el cliente a ritmo (pace)
         if (goalType === 'time' && rawTargetTime) {
             const totalSeconds = timeToSeconds(rawTargetTime);
             const secondPerKm = totalSeconds / goalDistance;
@@ -528,7 +460,7 @@ document.getElementById('newPlanForm').addEventListener('submit', async (e) => {
             userId: userId,
             goalDistance: goalDistance,
             targetDate: formData.get('targetDate'),
-            targetTime: targetTime, // Envío del ritmo calculado
+            targetTime: targetTime,
             level: formData.get('planLevel') || 'beginner',
             description: formData.get('description') || null
         };
@@ -554,13 +486,11 @@ document.getElementById('newPlanForm').addEventListener('submit', async (e) => {
     }
 });
 
-// Envío del formulario para registrar una sesión realizada físicamente
 document.getElementById('logRunForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const linkVal = formData.get('linkSession'); // Formato de valor: planId|sessionId
+    const linkVal = formData.get('linkSession');
 
-    // Formatear duración de MM:SS a segundos
     const rawDuration = formData.get('runDuration');
     const durationSeconds = timeToSeconds(rawDuration);
 
@@ -572,7 +502,6 @@ document.getElementById('logRunForm').addEventListener('submit', async (e) => {
     };
 
     try {
-        // 1. Registra la sesión completada en el historial general de carreras
         const resRun = await fetch(`${API_BASE_URL}/runs`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -585,7 +514,6 @@ document.getElementById('logRunForm').addEventListener('submit', async (e) => {
         }
         const savedRun = await resRun.json();
 
-        // 2. Si se vinculó a una sesión planificada, la marca como completada y vincula el ID del log real
         if (linkVal) {
             const [planId, sessionId] = linkVal.split('|');
             await fetch(`${API_BASE_URL}/training/${planId}/sessions/${sessionId}/complete`, {
@@ -604,5 +532,4 @@ document.getElementById('logRunForm').addEventListener('submit', async (e) => {
     }
 });
 
-// Ejecución de la inicialización de la página
 init();
