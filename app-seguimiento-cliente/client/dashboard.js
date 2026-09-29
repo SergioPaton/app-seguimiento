@@ -123,7 +123,7 @@ function renderPlan(plan) {
                                     showToast(`¡Ciclo ${(plan.cycleNumber || 1) + 1} iniciado con éxito!`, 'success');
                                     await fetchPlan();
                                 } else {
-                                    showToast('Error al reiniciar el ciclo', 'error');
+                                    showToast('No se pudo avanzar al siguiente ciclo. Inténtalo de nuevo más tarde.', 'error');
                                 }
                             } catch (e) {
                                 showToast('Error de conexión', 'error');
