@@ -1,3 +1,4 @@
+// entire file content ...
 <!DOCTYPE html>
 <html lang="es">
 
@@ -178,6 +179,7 @@
                                 <option value="target">🎯 Preparar un Objetivo / Carrera (Fecha Fija)</option>
                                 <option value="generic">🔁 Rutina Recurrente en Bucle (Sin fecha límite)</option>
                             </select>
+                            <span class="help-icon" title="Selecciona si quieres un plan con fecha específica (objetivo) o una rutina recurrente sin fecha límite.">❓</span>
                         </div>
                         
                         <!-- Selector de Nivel de Dificultad -->
@@ -188,6 +190,7 @@
                                 <option value="intermediate" selected>🏃 Intermedio (Equilibrado, progresión 7%)</option>
                                 <option value="advanced">⚡ Avanzado (Alta exigencia, progresión 10%)</option>
                             </select>
+                            <span class="help-icon" title="Elige tu nivel de experiencia para ajustar la intensidad y progresión del plan.">❓</span>
                         </div>
 
                         <div class="form-group">
@@ -203,6 +206,7 @@
                                 <option value="6" selected>6 Semanas (Intermedio)</option>
                                 <option value="8">8 Semanas (Desarrollo Avanzado)</option>
                             </select>
+                            <span class="help-icon" title="Define cuántas semanas dura cada ciclo del plan (solo aplica para rutinas recurrentes).">❓</span>
                         </div>
 
                         <!-- Campos específicos para carrera con fecha límite -->
@@ -217,6 +221,7 @@
                                     <option value="time">⏱️ Tiempo Total de Carrera (ej: 45:00 para correr 10k)</option>
                                     <option value="pace">📍 Ritmo por Kilómetro (ej: 4:30 min/km)</option>
                                 </select>
+                                <span class="help-icon" title="Elige si tu objetivo es un tiempo total para la distancia o un ritmo por kilómetro.">❓</span>
                             </div>
                             <div class="form-group">
                                 <label for="targetTime" id="targetTimeLabel">Tiempo Objetivo Total <small style="font-weight:400; color: var(--color-text-light);">(MM:SS)</small></label>
@@ -424,6 +429,7 @@
                             <select id="linkSession" name="linkSession">
                                 <option value="">Ninguna / Carrera libre</option>
                             </select>
+                            <span class="help-icon" title="Selecciona una sesión planificada previamente para vincular el entrenamiento registrado y marcarla como completada.">❓</span>
                         </div>
                         <button type="submit" class="btn btn-primary" style="width: 100%;">Guardar
                             Entrenamiento</button>

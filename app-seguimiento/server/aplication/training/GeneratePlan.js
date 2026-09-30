@@ -24,6 +24,19 @@ class GeneratePlan {
         this.workoutLibrary = new WorkoutLibrary();
     }
 
+    /**
+     * Genera un plan de entrenamiento basado en los parámetros proporcionados.
+     * @param {Object} params - Parámetros de generación del plan.
+     * @param {string} params.userId - ID del usuario para quien se genera el plan.
+     * @param {number} params.goalDistance - Distancia objetivo en kilómetros (ej: 10 para 10k).
+     * @param {string} [params.targetDate] - Fecha objetivo en formato ISO (solo para planes con fecha fija).
+     * @param {string} [params.targetTime] - Tiempo objetivo total o ritmo (dependiendo de goalType).
+     * @param {string} [params.description] - Descripción opcional del plan.
+     * @param {boolean} [params.isGeneric] - Indica si el plan es genérico (rutina recurrente).
+     * @param {string} [params.level] - Nivel del corredor: 'beginner', 'intermediate' o 'advanced'.
+     * @param {number} [params.cycleWeeks] - Duración del ciclo en semanas (para planes genéricos).
+     * @param {number} [params.cycleNumber=1] - Número del ciclo (para sobrecarga progresiva en planes recurrentes).
+     */
     execute({ userId, goalDistance, targetDate, targetTime, description, isGeneric, level, cycleWeeks, cycleNumber = 1 }) {
         const user = this.userRepository.getById(userId);
         if (!user) {
