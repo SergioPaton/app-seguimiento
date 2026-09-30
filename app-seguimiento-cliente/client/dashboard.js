@@ -1,3 +1,4 @@
+// entire file content ...
 const API_BASE_URL = 'http://localhost:3000/api';
 
 const userId = localStorage.getItem('stride_user_id');
@@ -13,6 +14,7 @@ async function init() {
     await fetchUser();
     await fetchPlan();
     setupNavigation();
+    attachHelpIconListeners();
 }
 
 async function fetchUser() {
@@ -531,5 +533,15 @@ document.getElementById('logRunForm').addEventListener('submit', async (e) => {
         showToast(`Error al registrar el entrenamiento: ${e.message}`, 'error');
     }
 });
+
+function attachHelpIconListeners() {
+    document.addEventListener('click', function(e) {
+        if (e.target.matches('.help-icon')) {
+            e.preventDefault();
+            const msg = e.target.title;
+            showToast(msg, 'info');
+        }
+    });
+}
 
 init();
