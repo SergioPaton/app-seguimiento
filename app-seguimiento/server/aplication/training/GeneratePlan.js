@@ -1,3 +1,4 @@
+// entire file content ...
 const TrainingPlan = require('../../dominio/training/TrainingPlan');
 const Mesociclo = require('../../dominio/training/Mesociclo');
 const Microciclo = require('../../dominio/training/Microciclo');
@@ -182,6 +183,11 @@ class GeneratePlan {
                         targetDistance = Math.min(targetDistance, maxSecondarySession);
                     }
 
+                    // Cap session distance to goal distance to avoid overreaching
+                    if (finalGoalDistance && targetDistance > finalGoalDistance) {
+                        targetDistance = finalGoalDistance;
+                    }
+
                     const template = this.workoutLibrary.getWorkoutTemplate(sessionType, zones, parseFloat(targetDistance.toFixed(2)));
 
                     let finalPace = template.targetPace;
@@ -308,3 +314,4 @@ class GeneratePlan {
 }
 
 module.exports = GeneratePlan;
+// ... goes in between
