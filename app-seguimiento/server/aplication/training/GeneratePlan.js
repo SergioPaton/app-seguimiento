@@ -1,4 +1,3 @@
-// entire file content ...
 const TrainingPlan = require('../../dominio/training/TrainingPlan');
 const Mesociclo = require('../../dominio/training/Mesociclo');
 const Microciclo = require('../../dominio/training/Microciclo');
@@ -36,8 +35,9 @@ class GeneratePlan {
      * @param {string} [params.level] - Nivel del corredor: 'beginner', 'intermediate' o 'advanced'.
      * @param {number} [params.cycleWeeks] - Duración del ciclo en semanas (para planes genéricos).
      * @param {number} [params.cycleNumber=1] - Número del ciclo (para sobrecarga progresiva en planes recurrentes).
+     * @param {string} [params.trainingMode='advanced'] - Modalidad de entrenamiento: 'advanced' (con sesiones especiales) o 'simple' (solo carreras normales).
      */
-    execute({ userId, goalDistance, targetDate, targetTime, description, isGeneric, level, cycleWeeks, cycleNumber = 1 }) {
+    execute({ userId, goalDistance, targetDate, targetTime, description, isGeneric, level, cycleWeeks, cycleNumber = 1, trainingMode = 'advanced' }) {
         const user = this.userRepository.getById(userId);
         if (!user) {
             throw new ValidationError('User not found.');
@@ -149,7 +149,7 @@ class GeneratePlan {
                     : ['Monday', 'Wednesday', 'Friday'];
 
                 const runningDays = days.filter((day, index) => {
-                    const sessionType = this._determineSessionType(day, index, days.length, phase.type, userLevel);
+                    const sessionType = this._determineSessionType(day, index, days.length, phase.type, userLevel, trainingMode);
                     return sessionType !== 'Strength';
                 }).length;
 
@@ -166,7 +166,7 @@ class GeneratePlan {
                 }
 
                 days.forEach((day, index) => {
-                    const sessionType = this._determineSessionType(day, index, days.length, phase.type, userLevel);
+                    const sessionType = this._determineSessionType(day, index, days.length, phase.type, userLevel, trainingMode);
                     const isLongRun = sessionType === 'LongRun';
                     const isStrength = sessionType === 'Strength';
 
@@ -285,8 +285,26 @@ class GeneratePlan {
 
     /**
      * Internal logic to vary session types within a week based on phase and runner level.
+     * @param {string} trainingMode - 'advanced' (default) or 'simple'
      */
-    _determineSessionType(day, index, totalDays, phaseType, userLevel = 'beginner') {
+    _determineSessionType(day, index, totalDays, phaseType, userLevel = 'beginner', trainingMode = 'advanced') {
+        // En modo simple, solo devolvemos tipos de carrera básicos
+        if (trainingMode === 'simple') {
+            // Día de fuerza -> en modo simple lo convertimos en carrera fácil o descanso
+            if (day === 'Wednesday' || (totalDays > 3 && index === Math.floor(totalDays / 2))) {
+                return 'Easy'; // En lugar de Strength, carrera fácil
+            }
+
+            // Último día -> tirada larga
+            if (day === 'Sunday' || index === totalDays - 1) {
+                return 'LongRun';
+            }
+
+            // Resto de días -> carrera fácil
+            return 'Easy';
+        }
+
+        // --- MODO AVANZADO (ORIGINAL) ---
         if (day === 'Wednesday' || (totalDays > 3 && index === Math.floor(totalDays / 2))) {
             return 'Strength';
         }
@@ -327,4 +345,3 @@ class GeneratePlan {
 }
 
 module.exports = GeneratePlan;
-// ... goes in between
