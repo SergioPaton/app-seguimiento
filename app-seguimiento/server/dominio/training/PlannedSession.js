@@ -17,8 +17,10 @@ class PlannedSession {
      * @param {number} params.targetDuration - Duración objetivo en minutos.
      * @param {string} params.targetPace - Ritmo objetivo (ej: "5:30").
      * @param {string} [params.status='planned'] - Estado actual de la sesión ('planned', 'completed', 'skipped').
+     * @param {string} [params.realRunId=null] - ID de la carrera real completada.
+     * @param {number} [params.realPace=null] - Ritmo real registrado en min/km.
      */
-    constructor({ id, day, type, description, targetDistance, targetDuration, targetPace, status = 'planned' }) {
+    constructor({ id, day, type, description, targetDistance, targetDuration, targetPace, status = 'planned', realRunId = null, realPace = null }) {
         this.id = id;
         this.day = day; // Ej: 'Monday', 'Tuesday' o del 1 al 7
         this.type = type; // Ej: 'Easy Run', 'Intervals', 'Long Run'
@@ -27,7 +29,8 @@ class PlannedSession {
         this.targetDuration = targetDuration;
         this.targetPace = targetPace;
         this.status = status; // 'planned', 'completed', 'skipped'
-        this.realRunId = null; // Enlace a la entidad Run una vez completada
+        this.realRunId = realRunId; // Enlace a la entidad Run una vez completada
+        this.realPace = realPace; // Ritmo real registrado (min/km)
     }
 
     /**
@@ -55,10 +58,10 @@ class PlannedSession {
             targetDuration: this.targetDuration,
             targetPace: this.targetPace,
             status: this.status,
-            realRunId: this.realRunId
+            realRunId: this.realRunId,
+            realPace: this.realPace
         };
     }
 }
 
 module.exports = PlannedSession;
-

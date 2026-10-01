@@ -22,8 +22,10 @@ class User {
      * @param {number|string} [params.rhr] - Frecuencia cardíaca en reposo (Resting Heart Rate).
      * @param {string} [params.password] - Contraseña de acceso. Por defecto es '1234'.
      * @param {string} [params.level] - Nivel de experiencia del atleta ('beginner', 'intermediate', 'advanced').
+     * @param {number} [params.weeklyVolume] - Volumen semanal habitual/deseado en km.
+     * @param {number[]} [params.paceHistory] - Historial de ritmos registrados en min/km (auto-actualizado).
      */
-    constructor({ id, name, lastName, gender, age, pb, availableDays, rhr, password, level, weeklyVolume }) {
+    constructor({ id, name, lastName, gender, age, pb, availableDays, rhr, password, level, weeklyVolume, paceHistory }) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -41,6 +43,9 @@ class User {
         // Nivel de experiencia del atleta
         this.level = level || 'beginner';
         this.weeklyVolume = weeklyVolume ? parseFloat(weeklyVolume) : null;
+
+        // Historial de ritmos (auto-actualizado al registrar carreras)
+        this.paceHistory = paceHistory && Array.isArray(paceHistory) ? paceHistory : [];
 
         this._validate();
     }
@@ -75,7 +80,37 @@ class User {
         if (run.userId !== this.id) {
             throw new ValidationError('Esta carrera no pertenece a este usuario.');
         }
+        if (!this.runs) this.runs = [];
         this.runs.push(run);
+    }
+
+    /**
+     * Registra un ritmo (min/km) en el historial de rendimiento del usuario.
+     * Mantiene solo las últimas 10 marcas para calibración.
+     * 
+     * @param {number} pacePerKm - Ritmo en minutos por kilómetro.
+     */
+    addPaceToHistory(pacePerKm) {
+        if (!this.paceHistory) this.paceHistory = [];
+        this.paceHistory.push(parseFloat(pacePerKm.toFixed(2)));
+        if (this.paceHistory.length > 10) {
+            this.paceHistory.shift();
+        }
+    }
+
+    /**
+     * Calcula el nivel dinámico basado en el historial de ritmos si está disponible.
+     * 
+     * @returns {string} Nivel recalculado ('beginner', 'intermediate' o 'advanced').
+     */
+    getDynamicLevel() {
+        if (!this.paceHistory || this.paceHistory.length < 3) {
+            return this.level;
+        }
+        const avgPace = this.paceHistory.reduce((a, b) => a + b, 0) / this.paceHistory.length;
+        if (avgPace < 4.5) return 'advanced';
+        if (avgPace < 5.5) return 'intermediate';
+        return 'beginner';
     }
 
     /**
@@ -113,10 +148,10 @@ class User {
             rhr: this.rhr,
             password: this.password,
             level: this.level,
-            weeklyVolume: this.weeklyVolume
+            weeklyVolume: this.weeklyVolume,
+            paceHistory: this.paceHistory || []
         };
     }
 }
 
 module.exports = User;
-

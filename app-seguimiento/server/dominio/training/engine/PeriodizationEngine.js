@@ -1,16 +1,7 @@
 /**
  * Motor de periodización lógica para la planificación deportiva.
- * Distribuye el plan de entrenamiento global en fases temáticas (Mesociclos) a lo largo de las semanas disponibles.
- * 
- * @class PeriodizationEngine
  */
 class PeriodizationEngine {
-    /**
-     * Define las fases y la cantidad de semanas correspondientes a cada una, basándose en la duración total.
-     * 
-     * @param {number} totalWeeks - Número total de semanas disponibles hasta la fecha objetivo.
-     * @returns {Array<{type: string, weeks: number}>} Lista de definiciones de mesociclos con sus duraciones estimadas.
-     */
     definePhases(totalWeeks, isGeneric = false) {
         if (isGeneric) {
             if (totalWeeks <= 2) {
@@ -36,7 +27,6 @@ class PeriodizationEngine {
         const taperWeeks = totalWeeks > 12 ? 3 : 2;
         const remainingWeeks = totalWeeks - taperWeeks;
 
-        // Distribución: Aproximadamente 60% de las semanas restantes para preparación específica, 40% para base
         const specificWeeks = Math.floor(remainingWeeks * 0.6);
         const baseWeeks = remainingWeeks - specificWeeks;
 
@@ -54,4 +44,3 @@ class PeriodizationEngine {
 }
 
 module.exports = PeriodizationEngine;
-

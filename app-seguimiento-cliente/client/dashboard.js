@@ -1,5 +1,29 @@
-// entire file content ...
 const API_BASE_URL = 'http://localhost:3000/api';
+
+function showToast(message, type = 'success') {
+    let container = document.querySelector('.toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+    
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.textContent = message;
+    
+    container.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.classList.add('toast-fade-out');
+        setTimeout(() => {
+            toast.remove();
+            if (container.children.length === 0) {
+                container.remove();
+            }
+        }, 300);
+    }, 4000);
+}
 
 const userId = localStorage.getItem('stride_user_id');
 
@@ -253,31 +277,6 @@ function showConfirm(title, message, onConfirm, confirmText = 'Eliminar') {
     cancelBtn.onclick = close;
 }
 
-function showToast(message, type = 'success') {
-    let container = document.querySelector('.toast-container');
-    if (!container) {
-        container = document.createElement('div');
-        container.className = 'toast-container';
-        document.body.appendChild(container);
-    }
-    
-    const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
-    toast.textContent = message;
-    
-    container.appendChild(toast);
-    
-    setTimeout(() => {
-        toast.classList.add('toast-fade-out');
-        setTimeout(() => {
-            toast.remove();
-            if (container.children.length === 0) {
-                container.remove();
-            }
-        }, 300);
-    }, 4000);
-}
-
 function timeToSeconds(timeStr) {
     if (!timeStr) return 0;
     const parts = timeStr.split(':').map(Number);
@@ -521,11 +520,18 @@ document.getElementById('logRunForm').addEventListener('submit', async (e) => {
 
         if (linkVal) {
             const [planId, sessionId] = linkVal.split('|');
-            await fetch(`${API_BASE_URL}/training/${planId}/sessions/${sessionId}/complete`, {
+            const completeRes = await fetch(`${API_BASE_URL}/training/${planId}/sessions/${sessionId}/complete`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ runId: savedRun.id })
             });
+            const completeData = await completeRes.json();
+            
+            if (completeData.adapted) {
+                showToast(`¡Plan adaptado! ${completeData.message}`, 'info');
+            } else if (completeData.message) {
+                showToast(completeData.message, 'success');
+            }
         }
 
         showToast('Entrenamiento registrado correctamente', 'success');

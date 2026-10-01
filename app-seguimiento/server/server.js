@@ -42,12 +42,14 @@ const GeneratePlan = require('./aplication/training/GeneratePlan');
 const DeleteTrainingPlan = require('./aplication/training/DeleteTrainingPlan');
 const CompletePlannedSession = require('./aplication/training/CompletePlannedSession');
 const AdvancePlanCycle = require('./aplication/training/AdvancePlanCycle');
+const AdaptPlan = require('./aplication/training/AdaptPlan');
 
 // Instanciación de los casos de uso / servicios de aplicación
 const generatePlan = new GeneratePlan(userRepository, trainingRepository);
 const deleteTrainingPlan = new DeleteTrainingPlan(trainingRepository);
-const completePlannedSession = new CompletePlannedSession(trainingRepository, runRepository);
+const completePlannedSession = new CompletePlannedSession(trainingRepository, runRepository, userRepository);
 const advancePlanCycle = new AdvancePlanCycle(trainingRepository, userRepository, generatePlan);
+const adaptPlan = new AdaptPlan(userRepository, trainingRepository);
 
 const getAllRuns = new GetAllRuns(runRepository);
 const getRunById = new GetRunById(runRepository);
@@ -173,6 +175,25 @@ app.delete('/api/users/:id', (req, res, next) => {
     try {
         deleteUser.execute(req.params.id);
         res.json({ message: 'Usuario eliminado con éxito' });
+    } catch (error) {
+        next(error);
+    }
+});
+
+/**
+ * Actualizar las Mejores Marcas (PBs) del usuario con el rendimiento de una carrera registrada.
+ * Útil para refrescar datos de rendimiento sin completar una sesión planificada.
+ * @route POST /api/users/:id/update-progress
+ */
+app.post('/api/users/:id/update-progress', (req, res, next) => {
+    try {
+        const result = adaptPlan.execute(req.params.id, {
+            distance: req.body.distance,
+            duration: req.body.duration,
+            date: req.body.date || new Date().toISOString(),
+            note: req.body.note || 'Actualización manual de progreso'
+        });
+        res.json(result);
     } catch (error) {
         next(error);
     }
@@ -331,13 +352,19 @@ app.delete('/api/training/:id', (req, res, next) => {
 
 /**
  * Marcar una sesión planificada de entrenamiento como completada, asociándole un registro de carrera.
+ * Al completar, el plan se adapta automáticamente si el rendimiento es superior al esperado.
  * @route POST /api/training/:planId/sessions/:sessionId/complete
  */
 app.post('/api/training/:planId/sessions/:sessionId/complete', (req, res, next) => {
     try {
-        const { runId } = req.body;
-        const updatedPlan = completePlannedSession.execute(req.params.planId, req.params.sessionId, runId);
-        res.json(updatedPlan);
+        const { runId, autoAdapt } = req.body;
+        const result = completePlannedSession.execute(
+            req.params.planId,
+            req.params.sessionId,
+            runId,
+            autoAdapt !== false
+        );
+        res.json(result);
     } catch (error) {
         next(error);
     }
@@ -354,4 +381,3 @@ if (require.main === module) {
 }
 
 module.exports = app;
-
