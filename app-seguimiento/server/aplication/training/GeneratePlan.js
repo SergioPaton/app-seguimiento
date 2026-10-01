@@ -43,7 +43,8 @@ class GeneratePlan {
             throw new ValidationError('User not found.');
         }
 
-        const userLevel = level || user.level || 'beginner';
+        // Nivel dinámico: si el usuario tiene suficiente historial de ritmos, se calcula automáticamente
+        const userLevel = level || user.getDynamicLevel() || user.level || 'beginner';
 
         let finalGoalDistance = goalDistance ? parseFloat(goalDistance) : null;
         let finalTargetDate = targetDate;

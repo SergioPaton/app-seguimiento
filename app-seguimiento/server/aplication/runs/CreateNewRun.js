@@ -21,13 +21,18 @@ class CreateNewRun {
      * Crea la entidad Run, valida que no sea duplicada y le asigna un ID autoincremental antes de guardarla.
      * 
      * @param {Object} runData - Datos de la carrera a registrar.
+     * @param {string} [runData.userId] - ID del usuario (se puede omitir si ya está en el contexto de sesión).
      * @returns {Object} El objeto plano de la carrera registrada (JSON).
      * @throws {ValidationError} Si ya existe una carrera idéntica (misma fecha, distancia y duración).
      */
     execute(runData) {
         // 1. Crear la instancia del dominio
-        const { date, ...dataToCreate } = runData;
-        const newRun = new Run(dataToCreate);
+        const { date, userId, ...dataToCreate } = runData;
+        const runWithUser = {
+            userId: userId || dataToCreate.userId || null,
+            ...dataToCreate
+        };
+        const newRun = new Run(runWithUser);
 
         const runs = this.runRepository.getAll();
 
@@ -53,4 +58,3 @@ class CreateNewRun {
 }
 
 module.exports = CreateNewRun;
-
