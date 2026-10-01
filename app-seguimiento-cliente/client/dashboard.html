@@ -185,6 +185,16 @@
                             <span class="help-icon" title="Elige tu nivel de experiencia para ajustar la intensidad y progresión del plan.">❓</span>
                         </div>
 
+                        <!-- NUEVA OPCIÓN: Modalidad de Entrenamiento -->
+                        <div class="form-group">
+                            <label for="trainingMode">Modalidad de Entrenamiento</label>
+                            <select id="trainingMode" name="trainingMode" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem; font-family: inherit;">
+                                <option value="advanced">⚡ Complejo (con intervalos, farleks, fuerza, etc.)</option>
+                                <option value="simple" selected>🏃 Sencillo (solo carreras normales a ritmo)</option>
+                            </select>
+                            <span class="help-icon" title="Selecciona si el plan incluirá sesiones especiales (intervalos, farleks, umbral) o solo carreras normales a ritmo constante.">❓</span>
+                        </div>
+
                         <div class="form-group">
                             <label for="goalDistance">Distancia Objetivo (km)</label>
                             <input type="number" id="goalDistance" name="goalDistance" value="10" step="0.1" min="1" max="100" required style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--color-border); margin-top: 0.25rem;">
