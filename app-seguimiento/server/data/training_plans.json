@@ -2886,5 +2886,937 @@
         ]
       }
     ]
+  },
+  {
+    "id": "1790855467957",
+    "userId": "44",
+    "goal": {
+      "distance": 10,
+      "description": "10km"
+    },
+    "startDate": "2026-10-01T11:51:07.957Z",
+    "endDate": "2027-03-28T00:00:00.000Z",
+    "isGeneric": false,
+    "isLoopable": false,
+    "cycleWeeks": 25,
+    "cycleNumber": 1,
+    "level": "intermediate",
+    "mesociclos": [
+      {
+        "type": "General Base",
+        "microciclos": [
+          {
+            "weekNumber": 1,
+            "startDate": "2026-10-01",
+            "sessions": [
+              {
+                "id": "1-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 6.42km",
+                "targetDistance": 6.42,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "1-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 6.42km",
+                "targetDistance": 6.42,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "1-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 8.56km a ritmo sostenido para ganar fondo",
+                "targetDistance": 8.56,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 2,
+            "startDate": "2026-10-08",
+            "sessions": [
+              {
+                "id": "2-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 6.87km",
+                "targetDistance": 6.87,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "2-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 6.87km",
+                "targetDistance": 6.87,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "2-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 9.16km a ritmo sostenido para ganar fondo",
+                "targetDistance": 9.16,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 3,
+            "startDate": "2026-10-15",
+            "sessions": [
+              {
+                "id": "3-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 7.35km",
+                "targetDistance": 7.35,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "3-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 7.35km",
+                "targetDistance": 7.35,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "3-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 9.8km a ritmo sostenido para ganar fondo",
+                "targetDistance": 9.8,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 4,
+            "startDate": "2026-10-22",
+            "sessions": [
+              {
+                "id": "4-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 6.25km",
+                "targetDistance": 6.25,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "4-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 6.25km",
+                "targetDistance": 6.25,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "4-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 8.33km a ritmo sostenido para ganar fondo",
+                "targetDistance": 8.33,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 5,
+            "startDate": "2026-10-29",
+            "sessions": [
+              {
+                "id": "5-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 7.86km",
+                "targetDistance": 7.86,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "5-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 7.86km",
+                "targetDistance": 7.86,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "5-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 6,
+            "startDate": "2026-11-05",
+            "sessions": [
+              {
+                "id": "6-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "6-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "6-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 7,
+            "startDate": "2026-11-12",
+            "sessions": [
+              {
+                "id": "7-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "7-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "7-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 8,
+            "startDate": "2026-11-19",
+            "sessions": [
+              {
+                "id": "8-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 7.65km",
+                "targetDistance": 7.65,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "8-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 7.65km",
+                "targetDistance": 7.65,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "8-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 9,
+            "startDate": "2026-11-26",
+            "sessions": [
+              {
+                "id": "9-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "9-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "9-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Specific Preparation",
+        "microciclos": [
+          {
+            "weekNumber": 10,
+            "startDate": "2026-12-03",
+            "sessions": [
+              {
+                "id": "10-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "10-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "10-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 11,
+            "startDate": "2026-12-10",
+            "sessions": [
+              {
+                "id": "11-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "11-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "11-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 12,
+            "startDate": "2026-12-17",
+            "sessions": [
+              {
+                "id": "12-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "12-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "12-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 13,
+            "startDate": "2026-12-24",
+            "sessions": [
+              {
+                "id": "13-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "13-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "13-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 14,
+            "startDate": "2026-12-31",
+            "sessions": [
+              {
+                "id": "14-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "14-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "14-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 15,
+            "startDate": "2027-01-07",
+            "sessions": [
+              {
+                "id": "15-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "15-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "15-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 16,
+            "startDate": "2027-01-14",
+            "sessions": [
+              {
+                "id": "16-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "16-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "16-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 17,
+            "startDate": "2027-01-21",
+            "sessions": [
+              {
+                "id": "17-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "17-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "17-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 18,
+            "startDate": "2027-01-28",
+            "sessions": [
+              {
+                "id": "18-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "18-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "18-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 19,
+            "startDate": "2027-02-04",
+            "sessions": [
+              {
+                "id": "19-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "19-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "19-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 20,
+            "startDate": "2027-02-11",
+            "sessions": [
+              {
+                "id": "20-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "20-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "20-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 21,
+            "startDate": "2027-02-18",
+            "sessions": [
+              {
+                "id": "21-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "21-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "21-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 22,
+            "startDate": "2027-02-25",
+            "sessions": [
+              {
+                "id": "22-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "22-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "22-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Tapering & Goal",
+        "microciclos": [
+          {
+            "weekNumber": 23,
+            "startDate": "2027-03-04",
+            "sessions": [
+              {
+                "id": "23-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "23-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 8km",
+                "targetDistance": 8,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "23-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 24,
+            "startDate": "2027-03-11",
+            "sessions": [
+              {
+                "id": "24-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 7.69km",
+                "targetDistance": 7.69,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "24-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 7.69km",
+                "targetDistance": 7.69,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "24-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 10km a ritmo sostenido para ganar fondo",
+                "targetDistance": 10,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          },
+          {
+            "weekNumber": 25,
+            "startDate": "2027-03-18",
+            "sessions": [
+              {
+                "id": "25-Monday",
+                "day": "Monday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 5.38km",
+                "targetDistance": 5.38,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "25-Wednesday",
+                "day": "Wednesday",
+                "type": "Easy Run",
+                "description": "Trote suave regenerativo de 5.38km",
+                "targetDistance": 5.38,
+                "targetPace": "6:06",
+                "status": "planned",
+                "realRunId": null
+              },
+              {
+                "id": "25-Saturday",
+                "day": "Saturday",
+                "type": "Long Run",
+                "description": "Carrera continua de 7.18km a ritmo sostenido para ganar fondo",
+                "targetDistance": 7.18,
+                "targetPace": "5:42",
+                "status": "planned",
+                "realRunId": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ]

@@ -715,15 +715,15 @@
     "gender": "M",
     "age": 28,
     "pb": {
-      "5k": null,
-      "10k": null
+      "5k": "25:00",
+      "10k": "60:00"
     },
     "availableDays": [
       "Monday",
       "Wednesday",
       "Saturday"
     ],
-    "rhr": null,
+    "rhr": 55,
     "password": "1234",
     "level": "beginner",
     "weeklyVolume": null
