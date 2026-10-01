@@ -394,6 +394,7 @@ document.getElementById('newPlanForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const planType = formData.get('planType');
+    const trainingMode = formData.get('trainingMode') || 'advanced';
 
     const inlineContainer = document.getElementById('inlineStatsContainer');
     if (inlineContainer && inlineContainer.style.display !== 'none') {
@@ -444,7 +445,8 @@ document.getElementById('newPlanForm').addEventListener('submit', async (e) => {
             goalDistance: parseFloat(formData.get('goalDistance')),
             level: formData.get('planLevel') || 'beginner',
             cycleWeeks: parseInt(formData.get('cycleWeeks')) || 6,
-            description: formData.get('description') || null
+            description: formData.get('description') || null,
+            trainingMode: trainingMode
         };
     } else {
         const goalType = formData.get('goalType');
@@ -464,7 +466,8 @@ document.getElementById('newPlanForm').addEventListener('submit', async (e) => {
             targetDate: formData.get('targetDate'),
             targetTime: targetTime,
             level: formData.get('planLevel') || 'beginner',
-            description: formData.get('description') || null
+            description: formData.get('description') || null,
+            trainingMode: trainingMode
         };
     }
 
