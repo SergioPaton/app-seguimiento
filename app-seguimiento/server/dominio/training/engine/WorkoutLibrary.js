@@ -1,18 +1,7 @@
 /**
  * Biblioteca de plantillas y lógica de estructuración de sesiones de entrenamiento.
- * Define la estructura y descripción de diferentes tipos de entrenamientos (series, tempo, cuestas, recuperación, etc.).
- * 
- * @class WorkoutLibrary
  */
 class WorkoutLibrary {
-    /**
-     * Obtiene una plantilla de sesión estructurada según el tipo de entrenamiento, zonas de ritmo y distancia total.
-     * 
-     * @param {string} sessionType - Tipo de sesión ('Easy', 'Intervals', 'Farklet', 'Strength', 'LongRun', 'Incremental', 'Tempo', 'Hills', 'Progression', 'Recovery').
-     * @param {Object} zones - Zonas de ritmo de entrenamiento calculadas (z1-z5).
-     * @param {number} totalDistance - Distancia total objetivo para la sesión de entrenamiento.
-     * @returns {Object} Un objeto con el tipo de entrenamiento estructurado, descripción detallada y ritmo objetivo.
-     */
     getWorkoutTemplate(sessionType, zones, totalDistance) {
         switch (sessionType) {
             case 'Incremental':
@@ -23,7 +12,7 @@ class WorkoutLibrary {
                     description: `${baseDist}km suave (@${zones.z2}) + ${fastDist}km alegre (@${zones.z3})`,
                     targetPace: zones.z3
                 };
- 
+
             case 'Intervals':
                 const repDist = totalDistance >= 10 ? 1.0 : 0.5;
                 let sets = Math.round((totalDistance * 0.5) / repDist);
@@ -38,7 +27,7 @@ class WorkoutLibrary {
                     description: `${warmup}km Trote Suave + ${sets}x${repLabel} @${zones.z4} (rec: 1'30") + ${cooldown}km Trote Suave`,
                     targetPace: zones.z4
                 };
- 
+
             case 'Farklet':
                 const farkletDist = parseFloat((totalDistance * 0.5).toFixed(1));
                 const remainingFarkletDist = totalDistance - farkletDist;
@@ -99,7 +88,7 @@ class WorkoutLibrary {
                     description: `Carrera regenerativa muy suave de ${totalDistance}km en zona de recuperación activa (@${zones.z1})`,
                     targetPace: zones.z1
                 };
- 
+
             case 'Strength':
                 return {
                     type: 'Strength',
@@ -107,14 +96,14 @@ class WorkoutLibrary {
                     targetPace: 'N/A',
                     targetDistance: 0
                 };
- 
+
             case 'LongRun':
                 return {
                     type: 'Long Run',
                     description: `Carrera continua de ${totalDistance}km a ritmo sostenido para ganar fondo`,
                     targetPace: zones.z2
                 };
- 
+
             default:
                 return {
                     type: 'Easy Run',
@@ -126,4 +115,3 @@ class WorkoutLibrary {
 }
 
 module.exports = WorkoutLibrary;
-
