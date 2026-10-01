@@ -12,4 +12,3 @@ timeout /t 3 /nobreak > nul
 
 echo Abriendo navegador...
 start "" "http://localhost:5173"
-
