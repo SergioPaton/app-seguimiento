@@ -44,4 +44,3 @@ class Mesociclo {
 }
 
 module.exports = Mesociclo;
-

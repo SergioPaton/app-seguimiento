@@ -47,4 +47,3 @@ class Microciclo {
 }
 
 module.exports = Microciclo;
-

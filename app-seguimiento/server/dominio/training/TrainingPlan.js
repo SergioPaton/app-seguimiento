@@ -91,4 +91,3 @@ class TrainingPlan {
 }
 
 module.exports = TrainingPlan;
-
