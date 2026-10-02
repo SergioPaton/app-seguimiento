@@ -155,7 +155,7 @@ class TrainingPlanValidator {
                 const prev = volumes[week - 2];
                 errors.push({ week, day: 0, rule: 'R1.3', severity: 'mayor',
                     calculation: `${volumes[week - 1]} km vs ${prev} km = +${changes[week - 2]}%`,
-                    detail: 'El volumen semanal sube más del 10% respecto a la semana anterior.' );
+                    detail: 'El volumen semanal sube más del 10% respecto a la semana anterior.' });
             }
 
             // R1.5 - Semana de descarga cada 3-4 semanas (-20/30%)
